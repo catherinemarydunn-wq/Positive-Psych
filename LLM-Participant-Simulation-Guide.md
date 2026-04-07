@@ -67,8 +67,9 @@ The workflow has six steps. In each, the left column is the student's intellectu
 | 2. Participant design | Characteristics, distributions, sample size, rationale | Generates YAML profiles + distribution summary | Verifies distributions match spec (spot-check, not individual profiles) |
 | 3. Instrument design | Constructs, item count, scale, reverse scoring, rationale | Generates survey items as CSV | Reviews every item; flags double-barrelled, off-construct, or unclear items; iterates |
 | 4. Simulation | Effect directions, sizes, justifications from readings | Writes/adapts Python; runs simulation | Reviews code against spec; flags mismatches; iterates |
-| **Pre-registration checkpoint** | *Commit the design specification (Steps 1–4 + priors) before running the analysis* | | |
-| 5. Analysis | Priors, prior predictive evaluation, fake data check, comparisons, sensitivity | Validates pipeline on fake data; fits model to simulated data; produces checks, posteriors, plots | Evaluates every plot and posterior summary (see standard plots) |
+| 5a. Pipeline validation | Priors, prior predictive evaluation, fake data check | Generates prior predictions and fake data; checks parameter recovery | Evaluates prior predictive plot and recovery plot; adjusts priors if needed |
+| **Pre-registration checkpoint** | *Commit the full design specification (Steps 1–4 + validated priors) before fitting the model* | | |
+| 5b. Fit and interpret | Comparisons, sensitivity analysis | Fits model to simulated data; produces posteriors, predictive checks, plots | Evaluates every plot and posterior summary (see standard plots) |
 | 6. Report | Discussion reasoning, limitations | Drafts Method/Results from artifacts | Checks drafted prose against actual output; revises |
 
 ### Step 1: Research question
@@ -153,13 +154,15 @@ Students give the LLM their full design specification and have it handle profile
 
 ### Pre-registration checkpoint
 
-Before running the analysis, the group commits their design specification as a record of what was planned before results were seen. This includes:
+After the analysis pipeline validates — that is, after priors have been adjusted to pass the prior predictive check (Stage 2 of Step 5) and the fake data recovery check (Stage 3) confirms parameter recovery — the group commits their full design specification. This is the record of what was planned before fitting the model to the simulated data.
+
+The checkpoint includes:
 
 - Research question (Step 1)
 - Participant design specification (Step 2)
 - Final reviewed instrument (Step 3)
 - Effect model specification with justifications (Step 4)
-- Prior specification with justifications (Stage 1 of Step 5)
+- Final prior specification with justifications, including any adjustments made during prior predictive and fake data checks (Stages 1–3 of Step 5)
 
 If the group uses a git repository, a tagged commit is the natural mechanism. Otherwise, a timestamped document works.
 
