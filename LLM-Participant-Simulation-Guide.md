@@ -26,6 +26,37 @@ A reference Python script (`simulate_wellbeing.py`) is included. If the LLM tool
 - Evaluating and revising LLM-generated output at every stage (profiles, items, code, analysis, prose)
 - Articulating the limitations of a data source honestly
 
+## Group roles
+
+The Mini Inquiry is a group project (2–3 students). Roles divide responsibility for *design decisions*, not access to the workflow. All group members should evaluate LLM output at every stage.
+
+### Research roles (notional)
+
+| Role | Owns which design decisions | Defends in presentation |
+|------|----------------------------|------------------------|
+| Design lead | Research question, participant design, instrument specification | Why this question, why these variables, why these distributions |
+| Modelling lead | Effect model, prior specification, sensitivity analysis choices | Why these effect sizes, why these priors, what sensitivity analysis revealed |
+| Interpretation lead | Results interpretation, discussion, limitations | What the posteriors mean, what would change with real participants |
+
+In a pair, two roles merge. Instructors may adjust role definitions to suit their section.
+
+### Git roles (formal)
+
+If the group uses a shared repository, formal Git roles structure the collaboration:
+
+- **Maintainer:** Creates the repository, manages branches, reviews and merges pull requests (PRs). Ideally a student who has completed GEAP 103 (Basic Computer Skills).
+- **Contributors:** Work on branches, submit PRs for review by the maintainer.
+
+The PR review step has pedagogical value: reviewing a teammate's PR is evaluating LLM output in context. The maintainer role is a natural fit for students with GEAP 103 experience.
+
+**Mixed preparation.** Some students in the Advancement Semester will have completed GEAP 103; others may have tested directly into B2 and have no Git experience. Options for instructors:
+
+- Structure groups so each has at least one GEAP 103 graduate as maintainer.
+- Allow groups without Git experience to use a simpler collaboration model (shared branch, no PR review).
+- Adjust the weight given to the collaboration component accordingly.
+
+The guide does not prescribe a single approach. Instructors should decide based on the composition of their section.
+
 ## The workflow
 
 The workflow has six steps. In each, the left column is the student's intellectual contribution; the right column is what the LLM executes.
