@@ -35,7 +35,7 @@ The workflow has six steps. In each, the left column is the student's intellectu
 | 2. Participant design | Characteristics, distributions, sample size, rationale | Generates YAML profiles |
 | 3. Instrument design | Constructs, item count, scale, reverse scoring, rationale | Generates survey items as CSV |
 | 4. Simulation | Effect directions, sizes, justifications from readings | Writes/adapts Python; runs simulation |
-| 5. Analysis | Priors, prior predictive evaluation, comparisons, sensitivity | Fits Bayesian model; produces checks, posteriors, plots |
+| 5. Analysis | Priors, prior predictive evaluation, fake data check, comparisons, sensitivity | Validates pipeline on fake data; fits model to simulated data; produces checks, posteriors, plots |
 | 6. Report | Discussion reasoning, limitations | Drafts Method/Results from artifacts |
 
 At every step, the student reviews and revises LLM output.
@@ -116,7 +116,7 @@ Students give the LLM their full design specification and have it handle profile
 
 ### Step 5: Analysis
 
-The simulation produces a CSV file. Students specify what they want to know; the LLM produces the analysis. The analysis follows a Bayesian workflow: specify priors, check that the priors are sensible, fit the model, check that the model's predictions match the data, then interpret and probe.
+The simulation produces a CSV file. Students specify what they want to know; the LLM produces the analysis. The analysis follows a Bayesian workflow: specify priors, check that the priors are sensible, validate the analysis pipeline on fake data, fit the model to the simulated data, check model fit, then interpret and probe.
 
 #### Why Bayesian
 
@@ -126,7 +126,7 @@ Bayesian analysis also fits the design/execute split cleanly. Prior specificatio
 
 #### The Bayesian workflow
 
-The analysis has five stages. The LLM executes all of them; the student specifies and evaluates.
+The analysis has six stages. The LLM executes all of them; the student specifies and evaluates.
 
 **1. Specify priors — what they expect before seeing the data.**
 
@@ -146,17 +146,25 @@ If the prior predictive distribution shows satisfaction scores below 1 or above 
 
 **Where the learning happens:** This is model criticism *before* seeing results. The student is asking "Do my assumptions, taken together, produce a world that makes sense?" This directly serves CLO 2 (critically evaluate empirical research) — if a published study used unreasonable assumptions, this is how one would detect it.
 
-**3. Fit the model.**
+**3. Fake data check — does the analysis pipeline work?**
 
-The LLM fits the Bayesian regression to the simulation output. The student does not need to understand MCMC internals. The LLM reports posterior distributions of each effect, credible intervals (e.g., 89% CI), and the probability that each effect is in the expected direction.
+This step validates the inference machinery *before* it touches the simulated data from Step 4. The LLM generates fake data directly from the Bayesian model (priors + likelihood) with known parameter values, fits the model to that fake data, and checks whether the fitted model recovers the known parameters.
 
-**4. Posterior predictive check — do the model's predictions match the data?**
+This is distinct from the simulated data produced in Step 4 of the workflow. The simulated data comes from the Python effect model and plays the role of "observed" data in this exercise. Fake data comes from the Bayesian model itself. The two data-generating processes are different, and this is the point: if the Bayesian model cannot recover known parameters from its own fake data, it will not produce trustworthy results from any data, simulated or real.
+
+**Where the learning happens:** If parameter recovery fails, the student must diagnose why — is the model misspecified? Are the priors too wide, washing out the signal? Is the sample size too small for the effect? These are exactly the questions a researcher asks when debugging an analysis. The student specifies the known parameter values (reusing the effect sizes from Step 4 is natural); the LLM generates, fits, and reports recovery.
+
+**4. Fit the model to the simulated data.**
+
+The LLM fits the Bayesian regression to the simulation output from Step 4. The student does not need to understand MCMC internals. The LLM reports posterior distributions of each effect, credible intervals (e.g., 89% CI), and the probability that each effect is in the expected direction.
+
+**5. Posterior predictive check — do the model's predictions match the data?**
 
 After fitting, the LLM generates predictions from the posterior and overlays them on the actual simulation data. The student evaluates whether the model captures the patterns in the data.
 
-Since the data is simulated with known effects, this is partly a code-verification step: if the posterior predictions don't match the simulation output, something is wrong in either the simulation code or the model specification. But the visual comparison also builds the habit of checking model fit rather than blindly trusting output.
+Since the data is simulated with known effects, a mismatch here means something is wrong in either the simulation code or the Bayesian model specification. But the visual comparison also builds the habit of checking model fit rather than blindly trusting output.
 
-**5. Interpret and probe.**
+**6. Interpret and probe.**
 
 Bayesian results produce statements like:
 
@@ -191,7 +199,7 @@ The report has sections that are primarily descriptive and sections that require
 | CLO | How the simulation addresses it |
 |---|---|
 | 1 (Theoretical frameworks) | Students operationalise a framework (PERMA, SDT, broaden-and-build, etc.) by specifying what to measure, what effects to model, and justifying effect sizes from the literature. |
-| 2 (Critical evaluation) | Prior predictive checks and posterior predictive checks teach model criticism: evaluating whether assumptions produce plausible predictions, and whether a fitted model captures the data. |
+| 2 (Critical evaluation) | Prior predictive checks, fake data recovery checks, and posterior predictive checks teach model criticism: evaluating whether assumptions produce plausible predictions, whether the analysis pipeline can recover known effects, and whether a fitted model captures the data. |
 | 3 (Academic texts) | The report requires citing course readings to justify the research question, the effect model, the priors, and the interpretation. |
 | 4 (Disciplinary terminology) | Design specifications, evaluation of generated items, effect-model justifications, and the report all require accurate use of terms (well-being, hedonic adaptation, self-efficacy, etc.). |
 | 5 (Academic discussion) | The 5-minute presentation requires supporting claims with evidence from the simulated data. |
