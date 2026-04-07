@@ -152,27 +152,9 @@ Students give the LLM their full design specification and have it handle profile
 
 **Reproducibility:** Same random seed must produce identical output. Students record the seed, the LLM and version used, and any prompts given.
 
-### Pre-registration checkpoint
-
-After the analysis pipeline validates — that is, after priors have been adjusted to pass the prior predictive check (Stage 2 of Step 5) and the fake data recovery check (Stage 3) confirms parameter recovery — the group commits their full design specification. This is the record of what was planned before fitting the model to the simulated data.
-
-The checkpoint includes:
-
-- Research question (Step 1)
-- Participant design specification (Step 2)
-- Final reviewed instrument (Step 3)
-- Effect model specification with justifications (Step 4)
-- Final prior specification with justifications, including any adjustments made during prior predictive and fake data checks (Stages 1–3 of Step 5)
-
-If the group uses a git repository, a tagged commit is the natural mechanism. Otherwise, a timestamped document works.
-
-With simulated data, there is nothing to "hack" — the student built the effects in and knows what the results should be. The point is not fraud prevention but the discipline of separating planning from analysis. In real research, this separation prevents post-hoc rationalisation (changing the analysis after seeing results and presenting the change as if it were planned). Practising the discipline now, even in a context where it is not strictly necessary, prepares students for contexts where it is (CLO 2, CLO 6).
-
-Changes to the analysis plan after the checkpoint (for example, adding a predictor suggested by the results) are allowed but must be disclosed in the report as post-hoc. The distinction between planned and exploratory analysis is itself a learning target.
-
 ### Step 5: Analysis
 
-The simulation produces a CSV file. Students specify what they want to know; the LLM produces the analysis. The analysis follows a Bayesian workflow: specify priors, check that the priors are sensible, validate the analysis pipeline on fake data, fit the model to the simulated data, check model fit, then interpret and probe.
+The simulation produces a CSV file. Students specify what they want to know; the LLM produces the analysis. The analysis follows a Bayesian workflow in two phases: pipeline validation (Step 5a), then — after the pre-registration checkpoint — fitting and interpretation (Step 5b).
 
 #### Why Bayesian
 
@@ -202,9 +184,9 @@ Since all inquiries use Likert-scale survey data, the plot set is predictable. S
 | 5. Interpret | Predicted group means with 89% credible intervals, grouped by condition (e.g., practice × cultural background) | What is the headline result? How much uncertainty remains? |
 | 5. Sensitivity | Side-by-side posterior densities under different priors or different effect assumptions | How sensitive are the conclusions to the assumptions? |
 
-#### The Bayesian workflow
+#### Step 5a: Pipeline validation
 
-The analysis has six stages. The LLM executes all of them; the student specifies and evaluates.
+Stages 1–3 validate the analysis machinery. Priors may be adjusted during this phase. The pre-registration checkpoint comes after this phase completes.
 
 **1. Specify priors — what they expect before seeing the data.**
 
@@ -233,6 +215,26 @@ This step validates the inference machinery *before* it touches the simulated da
 This is distinct from the simulated data produced in Step 4 of the workflow. The simulated data comes from the Python effect model and plays the role of "observed" data in this exercise. Fake data comes from the Bayesian model itself. The two data-generating processes are different, and this is the point: if the Bayesian model cannot recover known parameters from its own fake data, it will not produce trustworthy results from any data, simulated or real.
 
 **Where the learning happens:** If parameter recovery fails, the student must diagnose why — is the model misspecified? Are the priors too wide, washing out the signal? Is the sample size too small for the effect? These are exactly the questions a researcher asks when debugging an analysis. The student specifies the known parameter values (reusing the effect sizes from Step 4 is natural); the LLM generates, fits, and reports recovery.
+
+#### Pre-registration checkpoint
+
+After the pipeline validates — priors adjusted to pass the prior predictive check and fake data recovery confirmed — the group commits their full design specification. This is the record of what was planned before fitting the model to the simulated data.
+
+The checkpoint includes:
+
+- Research question (Step 1)
+- Participant design specification (Step 2)
+- Final reviewed instrument (Step 3)
+- Effect model specification with justifications (Step 4)
+- Final prior specification with justifications, including any adjustments made during pipeline validation (Step 5a)
+
+If the group uses a git repository, a tagged commit is the natural mechanism. Otherwise, a timestamped document works.
+
+With simulated data, there is nothing to "hack" — the student built the effects in and knows what the results should be. The point is not fraud prevention but the discipline of separating planning from analysis. In real research, this separation prevents post-hoc rationalisation (changing the analysis after seeing results and presenting the change as if it were planned). Practising the discipline now, even in a context where it is not strictly necessary, prepares students for contexts where it is (CLO 2, CLO 6).
+
+Changes to the analysis plan after the checkpoint (for example, adding a predictor suggested by the results) are allowed but must be disclosed in the report as post-hoc. The distinction between planned and exploratory analysis is itself a learning target.
+
+#### Step 5b: Fit and interpret
 
 **4. Fit the model to the simulated data.**
 
