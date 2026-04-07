@@ -294,6 +294,6 @@ The report has sections that are primarily descriptive and sections that require
 
 ## Provenance
 
-This simulation method is adapted from an agent-based participant simulation workflow used in experimental linguistics (Reynolds, 2025, unpublished), where synthetic participant profiles with demographic characteristics generate judgment data for experimental design checking. The original uses Python and YAML profiles to produce 3,672 observations from 102 participants in a Latin-square design.
+This simulation method is adapted from an agent-based participant simulation workflow used in experimental linguistics ([Reynolds, 2025, unpublished](https://github.com/BrettRey/Independent-relative-whose)), where synthetic participant profiles with demographic characteristics generate judgment data for experimental design checking. The original uses Python and YAML profiles to produce 3,672 observations from 102 participants in a Latin-square design.
 
 The methodological principle is the same: participant characteristics are defined explicitly and separately from the effect model, making assumptions visible and the simulation reproducible. The key difference is epistemological: in the original, simulated data debugs experimental designs before collecting human data; here, it teaches the research workflow itself.
