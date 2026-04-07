@@ -117,7 +117,7 @@ Students specify what to measure, how, and why. The LLM generates the items. The
 - **Scale.** What response format? (e.g., 1–7 Likert, where 1 = strongly disagree and 7 = strongly agree). Why that scale?
 - **Item count.** How many items per construct? Students can ask the LLM what is standard for the constructs they are measuring.
 - **Reverse-scored items.** At least some. These check that the model produces internally consistent responses.
-- **Item quality constraints.** Each item should measure one thing. Items should be at a language level the simulated population would understand.
+- **Item quality constraints.** Each item should measure one thing. Items should be accessible at B2 level, since the students writing and evaluating them are B2 learners.
 
 **Example specification:**
 
