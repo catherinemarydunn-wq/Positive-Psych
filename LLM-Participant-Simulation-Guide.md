@@ -1,0 +1,299 @@
+# LLM-Based Participant Simulation for the Mini Inquiry Project
+
+## Purpose
+
+This document proposes a methodology for the Mini Inquiry Project (course learning outcome [CLO] 6): LLM-based participant simulation. Students build a simulation that generates synthetic survey responses, analyse the output using Bayesian statistics, and report on the results. The method teaches the full research workflow (operationalisation, measurement, simulation, analysis, interpretation) without requiring ethics approval, participant recruitment, or data collection infrastructure.
+
+The core principle throughout is that **students make design decisions and the large language model (LLM) handles execution**. At every step, the student specifies what and why; the LLM generates profiles, writes code, runs analyses, and drafts descriptive prose. The student evaluates LLM output and provides the interpretation.
+
+A reference Python script (`simulate_wellbeing.py`) is included. If the LLM tool students use supports sub-agent orchestration (e.g., GitHub Copilot CLI's `/fleet` command), the entire workflow from profile generation through analysis can be dispatched as parallel subtasks from a single design specification.
+
+## What this is (and what it is not)
+
+**This is a methods exercise.** The simulated data reflects modelling assumptions that the student makes explicit, not the psychology of actual humans. Any "findings" are hypotheses worth testing with real participants, not conclusions about human well-being.
+
+**This is not empirical research on human psychology.** The word "inquiry" is deliberate. Students are not conducting experiments, and the report should not claim to have discovered facts about people. The correct framing is: "Given these modelling assumptions, the simulation produced these patterns. Here is what that suggests we should investigate with real participants."
+
+### Learning targets
+
+- Translating a research question into measurable variables
+- Specifying a participant population: what characteristics matter, what their distributions should look like, and why
+- Specifying what constructs to measure and evaluating whether generated survey items actually measure them
+- Specifying effect assumptions and justifying their direction and size from course readings
+- Specifying prior beliefs about effects, justifying the choice of informative vs. vague priors, and evaluating prior predictive output for plausibility
+- Validating an analysis pipeline using fake data and diagnosing recovery failures
+- Deciding what analytical questions to ask and interpreting posterior probabilities and credible intervals
+- Evaluating and revising LLM-generated output at every stage (profiles, items, code, analysis, prose)
+- Articulating the limitations of a data source honestly
+
+## Group roles
+
+The Mini Inquiry is a group project (2–3 students). Roles divide responsibility for *design decisions*, not access to the workflow. All group members should evaluate LLM output at every stage.
+
+### Research roles (notional)
+
+| Role | Owns which design decisions | Defends in presentation |
+|------|----------------------------|------------------------|
+| Design lead | Research question, participant design, instrument specification | Why this question, why these variables, why these distributions |
+| Modelling lead | Effect model, prior specification, sensitivity analysis choices | Why these effect sizes, why these priors, what sensitivity analysis revealed |
+| Interpretation lead | Results interpretation, discussion, limitations | What the posteriors mean, what would change with real participants |
+
+In a pair, two roles merge. Instructors may adjust role definitions to suit their section.
+
+### Git roles (formal)
+
+If the group uses a shared repository, formal Git roles structure the collaboration:
+
+- **Maintainer:** Creates the repository, manages branches, reviews and merges pull requests (PRs). Ideally a student who has completed GEAP 103 (Basic Computer Skills).
+- **Contributors:** Work on branches, submit PRs for review by the maintainer.
+
+The PR review step has pedagogical value: reviewing a teammate's PR is evaluating LLM output in context. The maintainer role is a natural fit for students with GEAP 103 experience.
+
+**Mixed preparation.** Some students in the Advancement Semester will have completed GEAP 103; others may have tested directly into B2 and have no Git experience. Options for instructors:
+
+- Structure groups so each has at least one GEAP 103 graduate as maintainer.
+- Allow groups without Git experience to use a simpler collaboration model (shared branch, no PR review).
+- Adjust the weight given to the collaboration component accordingly.
+
+The guide does not prescribe a single approach. Instructors should decide based on the composition of their section.
+
+## The workflow
+
+The workflow has six steps. In each, the left column is the student's intellectual contribution; the right column is what the LLM executes.
+
+| Step | Student decides | LLM executes | Student reviews |
+|------|----------------|--------------|-----------------|
+| 1. Research question | What to investigate and why | — | — |
+| 2. Participant design | Characteristics, distributions, sample size, rationale | Generates YAML profiles + distribution summary | Verifies distributions match spec (spot-check, not individual profiles) |
+| 3. Instrument design | Constructs, item count, scale, reverse scoring, rationale | Generates survey items as CSV | Reviews every item; flags double-barrelled, off-construct, or unclear items; iterates |
+| 4. Simulation | Effect directions, sizes, justifications from readings | Writes/adapts Python; runs simulation | Reviews code against spec; flags mismatches; iterates |
+| 5a. Pipeline validation | Priors, prior predictive evaluation, fake data check | Generates prior predictions and fake data; checks parameter recovery | Evaluates prior predictive plot and recovery plot; adjusts priors if needed |
+| **Pre-registration checkpoint** | *Commit the full design specification (Steps 1–4 + validated priors) before fitting the model* | | |
+| 5b. Fit and interpret | Comparisons, sensitivity analysis | Fits model to simulated data; produces posteriors, predictive checks, plots | Evaluates every plot and posterior summary (see standard plots) |
+| 6. Report | Discussion reasoning, limitations | Drafts Method/Results from artifacts | Checks drafted prose against actual output; revises |
+
+### Step 1: Research question
+
+Students start with a question that connects a positive psychology concept from the course to a characteristic that varies across people.
+
+**Examples:**
+- Does the relationship between gratitude practice and reported well-being differ by cultural background?
+- Do younger and older adults report different levels of flow in academic vs. leisure activities?
+- Does growth mindset predict different responses to setback scenarios across education levels?
+
+The question must be specific enough to operationalise. "Is happiness good?" is not a research question. "Do people who score higher on hedonic adaptation report lower satisfaction with repeated positive events?" is.
+
+### Step 2: Participant design
+
+Students specify the population; the LLM generates the profiles. Profiles are stored as individual YAML (Yet Another Markup Language) files, a human-readable data format.
+
+**What students specify:**
+- **Sample size.** There is no practical cost to generating hundreds of participants. Larger samples produce narrower credible intervals (more precise estimates). Students should ask the LLM what sample size gives useful precision for the effect size they expect.
+- **Characteristics and distributions.** Which demographic and psychological variables matter for the research question? What should their distributions look like?
+- **Independent variable.** How should participants be split across conditions?
+
+**Example specification:**
+
+> Generate 300 participant profiles as YAML files. Each participant should have:
+> - `participant_id` (P001–P300)
+> - `age` (18–55, skewed toward 20s — university population)
+> - `gender` (55% female, 43% male, 2% non-binary)
+> - `cultural_background` (equal thirds: East Asian international students in Canada, South Asian international students in Canada, Canadian-born — with specific nationalities and years-in-Canada details, not just region labels)
+> - `education` (all undergraduate, years 1–4 uniformly distributed)
+> - `wellbeing_baseline` (low / moderate / high, distributed 20% / 60% / 20%)
+> - `gratitude_practice` (half daily_journaling, half none — balanced across cultural backgrounds)
+> - `gratitude_duration_months` (1–6 for journaling participants, 0 for others)
+> - `random_seed` (unique integer per participant)
+
+**Review:** Students do not review 300 individual profiles. Instead, the LLM produces a distribution summary alongside the profiles (counts by cultural background, age histogram, practice-group balance, etc.). The student checks that the summary matches the specification. If distributions are off — for example, cultural backgrounds are not balanced across practice conditions — the student flags the problem and the LLM regenerates.
+
+**Where the learning happens:** Deciding that cultural background should be split into equal thirds (rather than proportional to the actual student body) is a design choice that needs justifying. Deciding that well-being baseline should be 20/60/20 is a modelling assumption. These are the decisions the student defends. Generating 300 YAML files from that specification is mechanical. Verifying that the generated profiles actually implement the specification is a quality check the student must do.
+
+### Step 3: Instrument design
+
+Students specify what to measure, how, and why. The LLM generates the items. The student reviews every generated item, flags problems, and iterates until the instrument is sound. The study design is a survey: participants respond to Likert-scale items measuring one or more psychological constructs.
+
+**What students specify:**
+- **Constructs.** Which psychological constructs does the research question require? (e.g., gratitude, life satisfaction, hedonic adaptation). Justified from course readings.
+- **Scale.** What response format? (e.g., 1–7 Likert, where 1 = strongly disagree and 7 = strongly agree). Why that scale?
+- **Item count.** How many items per construct? Students can ask the LLM what is standard for the constructs they are measuring.
+- **Reverse-scored items.** At least some. These check that the model produces internally consistent responses.
+- **Item quality constraints.** Each item should measure one thing. Items should be accessible at B2 level, since the students writing and evaluating them are B2 learners.
+
+**Example specification:**
+
+> Generate a survey instrument as a comma-separated values (CSV) file with columns for item_id, item_text, construct, and reverse_scored. I need items measuring two constructs: gratitude (8 items, including 2 reverse-scored) and life satisfaction (6 items, including 2 reverse-scored). Use a 1–7 Likert scale. Items should be written at a B2 English level. Base the items on established instruments (GQ-6 for gratitude, SWLS for satisfaction) but do not copy them verbatim.
+
+**Review:** Unlike participant profiles, the item set is small enough to review in full. For each generated item, students ask: Does it measure the intended construct? Does it measure only one thing? Is it clear at B2 level? Do the reverse-scored items genuinely reverse the construct? Items that fail are flagged and the LLM regenerates them. This review-revise loop may take 2–3 iterations.
+
+**Where the learning happens:** Deciding to measure gratitude and satisfaction (rather than flow and meaning) follows from the research question. Deciding on 8 + 6 items with reverse scoring is a methodological choice. Writing 14 item stems is mechanical. Evaluating whether each generated item actually measures what it claims to — and articulating why a double-barrelled or off-construct item is flawed — is the skill being practised.
+
+### Step 4: Simulation
+
+Students give the LLM their full design specification and have it handle profile generation, script writing, and execution. If the LLM tool supports sub-agents (e.g., Copilot CLI's `/fleet`), these can run as parallel subtasks.
+
+**Two starting points:**
+
+**Option A:** Adapt the reference script (`simulate_wellbeing.py`). The effect model section (`compute_base_rating`) is clearly marked as the part to modify.
+
+**Option B:** Have the LLM write a script from scratch, using the reference script as an architectural example.
+
+**Either way, the script should:**
+1. Load participant profiles from YAML files
+2. Load survey items from the CSV file
+3. Compute a base rating for each participant–item pair using explicit effect assumptions
+4. Add participant-level random effects and residual noise
+5. Constrain ratings to the scale
+6. Output a CSV file with one row per participant–item pair
+
+**Review:** The student reviews the generated code against the specification. Does `compute_base_rating` implement the effects the student specified? Are the effect sizes correct? Is the noise model reasonable? If the code diverges from the spec — for example, the LLM added an effect the student did not specify, or misunderstood the direction of a moderation — the student flags the discrepancy and the LLM revises.
+
+**Where the learning happens:** Deciding that gratitude practice should add ~0.8 to satisfaction ratings is a claim about the world that the student justifies from course readings (e.g., "Emmons & McCullough, 2003, found a medium effect"). Deciding that collectivist cultural background moderates that effect is a theoretical commitment. The LLM translates these into code. Confirming that the code actually implements what was specified — and catching cases where it doesn't — is a critical evaluation skill.
+
+**Reproducibility:** Same random seed must produce identical output. Students record the seed, the LLM and version used, and any prompts given.
+
+### Step 5: Analysis
+
+The simulation produces a CSV file. Students specify what they want to know; the LLM produces the analysis. The analysis follows a Bayesian workflow in two phases: pipeline validation (Step 5a), then — after the pre-registration checkpoint — fitting and interpretation (Step 5b).
+
+#### Why Bayesian
+
+Frequentist statistics answer a question nobody is asking ("If there were no effect, how often would we see data this extreme?"). Bayesian statistics answer the actual question ("Given the data, how probable is it that gratitude practice increases satisfaction, and by how much?"). For a methods exercise where students are learning to reason about evidence, Bayesian posterior probabilities are more honest and more intuitive. The p-value framework actively misleads novices ("not significant" ≠ "no effect"), and introducing it without the context to use it properly would be irresponsible. Bayesian credible intervals say what students think confidence intervals say.
+
+Bayesian analysis also fits the design/execute split cleanly. Prior specification is a design decision: the student decides what they expect and why. The mechanics (Markov chain Monte Carlo [MCMC] sampling, convergence checking) are the LLM's job. The student never needs to understand the sampling algorithm.
+
+#### Principles
+
+**Build iteratively, not all at once.** Students should not specify a full model and hit go. They start with a simple model (just the main effect), run the full workflow, then add the interaction term and run again. Each addition is a theoretical claim (CLO 1) that the student justifies before adding. This produces a richer presentation (CLO 5) — "I started with X, then added Y, and here is what changed" — and it makes debugging easier: if something breaks, the student knows which addition caused it.
+
+**Use weakly informative priors, not flat priors.** On a 1–7 Likert scale, an effect larger than ±3 points is implausible (it would push ratings off the scale). A flat prior that allows effects of ±100 is not "letting the data speak" — it is assigning probability to impossible values. Weakly informative priors constrain effects to a plausible range while remaining open to the data. Students should justify the *width* of the prior (how uncertain they are), not just the centre (what they expect).
+
+**Visualise at every stage.** Every stage of the workflow produces at least one plot. Describing what a plot shows is a language production opportunity (CLO 4, CLO 5). Comparing plots across stages ("the prior predicted X, but the posterior shows Y") is where interpretation lives.
+
+#### Standard plots
+
+Since all inquiries use Likert-scale survey data, the plot set is predictable. Standardising it simplifies assessment and lets students focus on interpretation rather than visualisation choices. The LLM produces all plots; the student evaluates and describes them.
+
+| Stage | Plot | What the student evaluates |
+|-------|------|---------------------------|
+| 1. Prior predictive check | Histogram of predicted ratings from priors alone (discrete bins, 1–7) | Do predictions stay within the scale? Is there pileup at floor or ceiling? |
+| 2. Fake data check | Parameter recovery: true values (x-axis) vs. posterior estimates with 89% CIs (y-axis). Points should fall near the diagonal. | Did the model recover the known parameters? Which ones did it miss, and why? |
+| 3. Fit | Posterior density plots for each effect parameter | How certain is the model about each effect? How do the posteriors compare to the priors? |
+| 3. Fit | Prior-to-posterior comparison: overlay prior and posterior densities for each effect | What did the data "teach" the model? Where did beliefs shift most? |
+| 4. Posterior predictive check | Overlay of posterior predictive distribution on actual simulated data (histogram, discrete bins) | Does the model capture the shape of the data? |
+| 5. Interpret | Predicted group means with 89% credible intervals, grouped by condition (e.g., practice × cultural background) | What is the headline result? How much uncertainty remains? |
+| 5. Sensitivity | Side-by-side posterior densities under different priors or different effect assumptions | How sensitive are the conclusions to the assumptions? |
+
+#### Step 5a: Pipeline validation
+
+Stages 1–3 validate the analysis machinery. Priors may be adjusted during this phase. The pre-registration checkpoint comes after this phase completes.
+
+**1. Specify priors — what they expect before seeing the data.**
+
+For each effect in the model, students specify a prior belief about its direction and size, justified from course readings. Priors should be *weakly informative*: centred on the expected value, with a width that constrains effects to the plausible range for a 1–7 scale.
+
+- Example: "Based on Emmons & McCullough (2003), I expect gratitude practice to have a positive effect on satisfaction of roughly 0.5–1.0 points on a 7-point scale. I'll use a normal prior centred on 0.7 with standard deviation (SD) 0.3."
+- Example: "I'm genuinely uncertain whether cultural background moderates the gratitude effect. I'll use a weakly informative prior centred on 0 with SD 0.5, which keeps the effect within ±1.5 points (99% of the prior mass)."
+- A prior that says "I don't know" (wide, centred on zero) is legitimate but should still be bounded — SD 1.0 on a 7-point scale, not SD 100. A prior that says "I'm fairly sure" (narrow, off zero) is also legitimate if justified. The student explains which and why.
+
+Students also specify the model structure: outcome variable (e.g., satisfaction rating), predictors (e.g., gratitude practice, cultural background, their interaction). The LLM chooses the implementation (PyMC, Stan, or a simpler conjugate approach for straightforward designs).
+
+**Start with a simple model** (just the main effect), then add the interaction after the simple model checks out. Each model addition is a new commit point in the analysis.
+
+**2. Prior predictive check — do the priors produce plausible predictions?**
+
+The LLM generates predictions from the priors alone and produces the **prior predictive histogram** (see standard plots). The student evaluates whether the predictions are plausible.
+
+If the distribution shows satisfaction scores below 1 or above 7, or predicts that most participants would rate at ceiling, the priors need adjusting. This is a concrete, visual sanity check that forces the student to confront what their priors actually mean.
+
+**Where the learning happens:** This is model criticism *before* seeing results. The student is asking "Do my assumptions, taken together, produce a world that makes sense?" This directly serves CLO 2 (critically evaluate empirical research) — if a published study used unreasonable assumptions, this is how one would detect it.
+
+**3. Fake data check — does the analysis pipeline work?**
+
+This step validates the inference machinery *before* it touches the simulated data from Step 4. The LLM generates fake data directly from the Bayesian model (priors + likelihood) with known parameter values, fits the model to that fake data, and produces the **parameter recovery plot** (see standard plots).
+
+This is distinct from the simulated data produced in Step 4 of the workflow. The simulated data comes from the Python effect model and plays the role of "observed" data in this exercise. Fake data comes from the Bayesian model itself. The two data-generating processes are different, and this is the point: if the Bayesian model cannot recover known parameters from its own fake data, it will not produce trustworthy results from any data, simulated or real.
+
+**Where the learning happens:** If parameter recovery fails, the student must diagnose why — is the model misspecified? Are the priors too wide, washing out the signal? Is the sample size too small for the effect? These are exactly the questions a researcher asks when debugging an analysis. The student specifies the known parameter values (reusing the effect sizes from Step 4 is natural); the LLM generates, fits, and reports recovery.
+
+#### Pre-registration checkpoint
+
+After the pipeline validates — priors adjusted to pass the prior predictive check and fake data recovery confirmed — the group commits their full design specification. This is the record of what was planned before fitting the model to the simulated data.
+
+The checkpoint includes:
+
+- Research question (Step 1)
+- Participant design specification (Step 2)
+- Final reviewed instrument (Step 3)
+- Effect model specification with justifications (Step 4)
+- Final prior specification with justifications, including any adjustments made during pipeline validation (Step 5a)
+
+If the group uses a git repository, a tagged commit is the natural mechanism. Otherwise, a timestamped document works.
+
+With simulated data, there is nothing to "hack" — the student built the effects in and knows what the results should be. The point is not fraud prevention but the discipline of separating planning from analysis. In real research, this separation prevents post-hoc rationalisation (changing the analysis after seeing results and presenting the change as if it were planned). Practising the discipline now, even in a context where it is not strictly necessary, prepares students for contexts where it is (CLO 2, CLO 6).
+
+Changes to the analysis plan after the checkpoint (for example, adding a predictor suggested by the results) are allowed but must be disclosed in the report as post-hoc. The distinction between planned and exploratory analysis is itself a learning target.
+
+#### Step 5b: Fit and interpret
+
+**4. Fit the model to the simulated data.**
+
+The LLM fits the Bayesian regression to the simulation output from Step 4 and produces the **posterior density plots** and **prior-to-posterior comparisons** (see standard plots). The student does not need to understand MCMC internals. The LLM reports posterior distributions of each effect, credible intervals (e.g., 89% CI), and the probability that each effect is in the expected direction.
+
+**5. Posterior predictive check — do the model's predictions match the data?**
+
+The LLM generates predictions from the posterior and produces the **posterior predictive overlay** (see standard plots). The student evaluates whether the model captures the patterns in the data.
+
+Since the data is simulated with known effects, a mismatch here means something is wrong in either the simulation code or the Bayesian model specification. But the visual comparison builds the habit of checking model fit rather than blindly trusting output.
+
+**6. Interpret and probe.**
+
+The LLM produces the **predicted group means plot** (see standard plots). Bayesian results produce statements like:
+
+- "There is a 94% probability that gratitude practice increases satisfaction ratings (median effect: 0.72 points, 89% CI [0.38, 1.09])."
+- "The probability that cultural background moderates the gratitude effect is 68%, with the moderation estimate centred near −0.25 (89% CI [−0.61, 0.14])."
+
+**Type S and Type M errors.** For each effect, students should also ask:
+- **Type S (sign):** What is the probability that the effect is in the *wrong direction*? If there is a 6% chance the effect is negative when the student predicted positive, that is a 6% Type S error rate.
+- **Type M (magnitude):** If the effect is real, how much could the estimate exaggerate it? The LLM can compute the ratio of the posterior median to the assumed true effect. A ratio of 2.0 means the estimate could be twice the true value.
+
+These replace "significant/not significant" with questions that matter: "Could I be wrong about the direction?" and "Could I be wrong about how big this is?" Students report both alongside the credible intervals.
+
+**Where the learning happens:** The first example statement suggests a fairly confident positive effect with low Type S risk. The second suggests genuine uncertainty — the credible interval includes zero, so the data are compatible with no moderation. What would it take to resolve that uncertainty? A larger sample? A different operationalisation of "cultural background"? That reasoning is the student's.
+
+**Sensitivity analysis.** The most interesting analytical move is changing a prior or an effect assumption and rerunning. The LLM produces the **sensitivity comparison plot** (see standard plots). What if a sceptical prior (centred on zero) is used for the main effect? Does the posterior still show a positive effect, or does it collapse? What if the cultural moderation were twice as large? The student specifies what to vary and why; the LLM reruns and produces comparison output. Interpreting why the posteriors did or did not change — and whether Type S and Type M errors shift — is where the learning happens.
+
+### Step 6: Report
+
+The report has sections that are primarily descriptive and sections that require judgment.
+
+**LLM drafts, student evaluates and revises:**
+1. **Research question** (1–2 sentences) — formulated in Step 1; the LLM can polish wording.
+2. **Method** — describes decisions already made in Steps 2–4, plus the analysis pipeline validation (priors, prior predictive check, fake data recovery). The LLM drafts directly from the design specifications and code. The student checks accuracy and completeness. Should specify the LLM used, the random seed, and the number of participants.
+3. **Results** — the LLM produced the prior predictive plots, fake data recovery results, posterior summaries, credible intervals, posterior predictive checks, and visualisations in Step 5. The student organises them and describes the patterns. The LLM can draft descriptions of what the plots show; the student checks against the actual output.
+
+**Student writes, LLM assists with language:**
+4. **Discussion** — What do the patterns suggest? What assumptions drive the result? What would change with real participants? This is interpretive work.
+5. **Limitations** — not optional; this is where the deepest thinking lives. At minimum:
+   - The data reflects the effect model the student built, not human psychology. Different assumptions produce different patterns.
+   - The priors influence the posteriors. Informative priors mean the results partly reflect prior beliefs, not just data. Vague priors are more data-driven but may be imprecise.
+   - If the LLM helped set effect sizes or priors, those reflect its training data, which may encode stereotypes or inaccuracies.
+   - The simulation cannot surprise the way real data can. It confirms or disconfirms the internal logic of the model, not a hypothesis about the world.
+
+## Connection to course learning outcomes
+
+| CLO | How the simulation addresses it |
+|---|---|
+| 1 (Theoretical frameworks) | Students operationalise a framework (PERMA, SDT, broaden-and-build, etc.) by specifying what to measure, what effects to model, and justifying effect sizes from the literature. |
+| 2 (Critical evaluation) | Prior predictive checks, fake data recovery checks, and posterior predictive checks teach model criticism. The pre-registration checkpoint teaches the distinction between planned and exploratory analysis. |
+| 3 (Academic texts) | The report requires citing course readings to justify the research question, the effect model, the priors, and the interpretation. |
+| 4 (Disciplinary terminology) | Design specifications, evaluation of generated items, effect-model justifications, and the report all require accurate use of terms (well-being, hedonic adaptation, self-efficacy, etc.). |
+| 5 (Academic discussion) | The 5-minute presentation uses a standardised Quarto Reveal.js template (`inquiry-presentation-template.qmd`) with designated slides for each report section. Plots are embedded from source code, so results cannot drift from the analysis. The student customises the content; the template provides the structure. |
+| 6 (Design and conduct inquiry) | The entire workflow. |
+| 7 (Well-being practices) | Students who study a well-being practice (gratitude, mindfulness, etc.) must understand it well enough to specify its expected effects and evaluate whether the simulation output is plausible. |
+
+## Provenance
+
+This simulation method is adapted from an agent-based participant simulation workflow used in experimental linguistics ([Reynolds, 2025, unpublished](https://github.com/BrettRey/Independent-relative-whose)), where synthetic participant profiles with demographic characteristics generate judgment data for experimental design checking. The original uses Python and YAML profiles to produce 3,672 observations from 102 participants in a Latin-square design.
+
+The methodological principle is the same: participant characteristics are defined explicitly and separately from the effect model, making assumptions visible and the simulation reproducible. The key difference is epistemological: in the original, simulated data debugs experimental designs before collecting human data; here, it teaches the research workflow itself.
