@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The Mini Inquiry Project (CLO 6) asks students to design and conduct a small inquiry using AI tools. This guide describes a method for that inquiry: building a simulation that generates synthetic participant responses to well-being survey items. Students define participant profiles, design an instrument, and either adapt a reference Python script or have an LLM write one for their specific research question. The simulation produces a CSV dataset that students then analyse and report on.
+The Mini Inquiry Project (CLO 6) asks students to design and conduct a small inquiry using AI tools. This guide describes a method for that inquiry: building a simulation that generates synthetic participant responses to well-being survey items. Students specify a research design (what characteristics to vary, what distributions, what effects to model), then use an LLM to generate participant profiles and write or adapt a Python simulation script. The simulation produces a CSV dataset that students then analyse and report on.
 
 This method teaches the full research workflow (operationalisation, measurement, simulation, analysis, interpretation) without requiring ethics approval, participant recruitment, or data collection infrastructure.
 
@@ -12,7 +12,7 @@ This method teaches the full research workflow (operationalisation, measurement,
 
 **The learning targets are:**
 - Translating a research question into measurable variables
-- Designing participant profiles with characteristics that could plausibly influence responses
+- Specifying a participant population: what characteristics matter, what their distributions should look like, and why
 - Constructing survey items that operationalise a construct
 - Using an LLM to build or adapt a simulation (code as a tool, not an end in itself)
 - Recognising patterns in data and reasoning about what they might mean
@@ -33,32 +33,29 @@ Start with a question that connects two things: a positive psychology concept fr
 
 The question should be specific enough to operationalise. "Is happiness good?" is not a research question. "Do people who score higher on hedonic adaptation report lower satisfaction with repeated positive events?" is.
 
-### Step 2: Design participant profiles
+### Step 2: Specify the participant design
 
-Define 20–40 participant profiles, each with characteristics relevant to your research question. Profiles are stored as individual YAML files, one per participant.
+Decide what characteristics your simulated participants should have and how those characteristics should be distributed. You are not writing individual profiles; you are specifying the population, and the LLM will generate the profiles.
 
-**Example profile (`participants/P01.yaml`):**
+**What to specify:**
+- **Sample size.** Choose a number large enough for your analysis to be meaningful. With code, there is no practical cost to generating 200 or 500 participants. Ask the LLM what sample size gives adequate statistical power for the effect size you expect.
+- **Characteristics and distributions.** Which demographic and psychological variables matter for your research question? What should their distributions look like?
+- **Your independent variable.** How should participants be split across conditions?
 
-```yaml
-participant_id: P01
-age: 21
-gender: Female
-cultural_background: South Korean, studying in Canada for 2 years
-education: Undergraduate (second year)
-wellbeing_baseline: moderate
-gratitude_practice: daily_journaling
-gratitude_duration_months: 3
-random_seed: 48291
-```
+**Example specification (for a gratitude × cultural background inquiry):**
 
-**Design principles:**
-- Vary the characteristic you are studying (your independent variable) systematically across profiles. If you are studying cultural background, include profiles from at least 3–4 backgrounds. If you are studying gratitude practice, include a clear split between practice and no-practice groups.
-- Keep other characteristics balanced. Do not make all your gratitude-journaling participants young women and all your non-journaling participants older men.
-- Use realistic, specific details. "East Asian" is too broad. "South Korean, grew up in Seoul, studying in Canada for 2 years" forces you to think about what "cultural background" actually means in your study.
-- Include 2–3 characteristics beyond your main variable (age, education, cultural background, life stage) to make profiles realistic.
-- Give each participant a unique `random_seed` for reproducibility.
+> Generate 300 participant profiles as YAML files. Each participant should have:
+> - `participant_id` (P001–P300)
+> - `age` (18–55, skewed toward 20s — university population)
+> - `gender` (55% female, 43% male, 2% non-binary)
+> - `cultural_background` (equal thirds: East Asian international students in Canada, South Asian international students in Canada, Canadian-born — with specific nationalities and years-in-Canada details, not just region labels)
+> - `education` (all undergraduate, years 1–4 uniformly distributed)
+> - `wellbeing_baseline` (low / moderate / high, distributed 20% / 60% / 20%)
+> - `gratitude_practice` (half daily_journaling, half none — balanced across cultural backgrounds)
+> - `gratitude_duration_months` (1–6 for journaling participants, 0 for others)
+> - `random_seed` (unique integer per participant)
 
-**Why this matters:** In real research, participant characteristics influence responses. Defining profiles explicitly makes those assumptions visible. The YAML format keeps participant metadata separate from the simulation logic, so you can change your effect model without redefining your participants.
+**The student's job is the design, not the data entry.** Deciding that cultural background should be split into equal thirds (rather than proportional to the actual student body) is a design choice that needs justifying. Deciding that well-being baseline should be 20/60/20 is a modelling assumption. These decisions are where the learning happens. Generating 300 YAML files from that specification is mechanical work that the LLM does.
 
 ### Step 3: Design your instrument
 
@@ -79,50 +76,48 @@ Store items in a CSV file (`items/survey_items.csv`) with columns for `item_id`,
 
 ### Step 4: Build the simulation
 
-This is where the LLM interaction happens. You have two options:
+Use an LLM to write or adapt a Python script that generates ratings. Two options:
 
-**Option A: Adapt the reference script.** A reference implementation (`simulate_wellbeing.py`) is provided with this guide. It loads YAML participant profiles, reads survey items from CSV, and generates ratings based on participant characteristics. Ask an LLM to help you modify the effect model to match your research question. For example: "I want cultural_background to influence the base rating for gratitude items. Participants from collectivist backgrounds should show a smaller effect of individual gratitude practice. How should I change the `compute_base_rating` function?"
+**Option A: Adapt the reference script.** A reference implementation (`simulate_wellbeing.py`) is provided with this guide. Ask an LLM to modify the effect model to match your research question. For example: "I want cultural_background to influence the base rating for gratitude items. Participants from collectivist backgrounds should show a smaller effect of individual gratitude practice. How should I change the `compute_base_rating` function?"
 
-**Option B: Have the LLM write a script from scratch.** Describe your research question, your participant profiles, and your survey items to the LLM and ask it to produce a Python script that generates simulated responses. Give it the reference script as an example of the structure you want.
+**Option B: Have the LLM write a script from scratch.** Describe your research question, your participant design, and your survey items. Give it the reference script as an example of the architecture you want.
 
 **Either way, the script should:**
 1. Load participant profiles from YAML files
 2. Load survey items from CSV
-3. Compute a base rating for each participant-item pair using explicit effect assumptions (e.g., gratitude practice adds +0.8 to satisfaction items; older participants rate 0.01 lower per year)
+3. Compute a base rating for each participant–item pair using explicit effect assumptions (e.g., gratitude practice adds +0.8 to satisfaction items; older participants rate 0.01 lower per year)
 4. Add participant-level random effects (consistent across items for each participant) and residual noise (trial-by-trial variability)
 5. Constrain ratings to the 1–7 scale
-6. Output a CSV with one row per participant-item pair, including participant demographics and ratings
+6. Output a CSV with one row per participant–item pair, including participant demographics and ratings
 
 **Critical principle:** The effect assumptions (Step 4.3) are the model's claims about the world. Students must state them explicitly, not hide them inside the code. A good simulation makes its assumptions visible so they can be questioned.
 
-**Reproducibility:** Running the script with the same random seed should produce identical output. Record the seed, the LLM and version used to write or adapt the code, and any prompts you gave it.
+**Reproducibility:** Running the script with the same random seed must produce identical output. Record the seed, the LLM and version used to write or adapt the code, and any prompts given.
 
 ### Step 5: Analyse the output
 
-The simulation produces a CSV file. Open it in a spreadsheet or use the LLM to help you summarise it.
+The simulation produces a CSV file. Use a spreadsheet, or ask the LLM to help with analysis and visualisation. The data is standard tabular data; any tool works.
 
-**Basic analysis:**
-- Calculate mean ratings by group (e.g., gratitude-practice vs. no-practice)
-- Calculate mean ratings by item (do reverse-scored items behave as expected?)
-- Compare means across your independent variable (e.g., does cultural background moderate the gratitude effect?)
-- Look for surprises: patterns you did not build into the effect model, or effects that are larger or smaller than you expected
+**Analysis:**
+- Mean ratings by group (e.g., gratitude-practice vs. no-practice)
+- Mean ratings by item (do reverse-scored items behave as expected?)
+- Comparisons across your independent variable (e.g., does cultural background moderate the gratitude effect?)
+- With an adequate sample size, basic statistical tests (t-test, ANOVA, or a simple regression) are feasible. Ask the LLM to run them and explain the output.
 
-**If you want to go further** (not required), ask an LLM to help you run a simple statistical test or produce a plot. The data is in CSV, so standard tools work.
-
-**The interesting question is not "what does the data show?" but "what did I assume, and what would change if I assumed differently?"** Try changing one effect parameter and rerunning the simulation. Does the pattern hold? This is what the simulation is for: testing the sensitivity of your conclusions to your assumptions.
+**The interesting question is not "what does the data show?" but "what did I assume, and what would change if I assumed differently?"** Change one effect parameter and rerun. Does the pattern hold? This is what simulation is for: testing the sensitivity of conclusions to assumptions.
 
 ### Step 6: Report
 
 The inquiry report should include:
 
 1. **Research question** (1–2 sentences)
-2. **Method** — Describe your participant profiles, your instrument, your effect model (what you assumed and why), and your simulation procedure. Specify the LLM used to build or adapt the code, the random seed, and the number of participants.
-3. **Results** — Present your data (a summary table and/or a figure) and describe the patterns.
-4. **Discussion** — What do the patterns suggest? What assumptions drive the result? What would you do differently if you were designing a study with real participants?
+2. **Method** — Describe your participant design (characteristics, distributions, sample size, and why), your instrument, your effect model (what you assumed and why), and your simulation procedure. Specify the LLM used, the random seed, and the number of participants.
+3. **Results** — Present your data (summary tables and/or figures) and describe the patterns.
+4. **Discussion** — What do the patterns suggest? What assumptions drive the result? What would you do differently with real participants?
 5. **Limitations** — This section is not optional. At minimum, address:
-   - The data reflects the effect model you built, not human psychology. Different assumptions would produce different patterns.
+   - The data reflects the effect model you built, not human psychology. Different assumptions produce different patterns.
    - If you used an LLM to help set effect sizes, those reflect the LLM's training data, which may encode stereotypes or inaccuracies.
-   - With 20–40 simulated participants and explicit effect assumptions, the simulation cannot surprise you in the way real data can. It confirms or disconfirms the internal logic of your model, not a hypothesis about the world.
+   - The simulation cannot surprise you the way real data can. It confirms or disconfirms the internal logic of your model, not a hypothesis about the world.
 
 ## Connection to course learning outcomes
 
@@ -130,7 +125,7 @@ The inquiry report should include:
 |---|---|
 | 1 (Theoretical frameworks) | Students operationalise a framework (PERMA, SDT, broaden-and-build, etc.) into survey items and explicit effect assumptions. |
 | 3 (Academic texts) | The report requires citing course readings to justify the research question, the effect model, and the interpretation. |
-| 4 (Disciplinary terminology) | Participant profiles, survey items, and effect-model descriptions require accurate use of terms (well-being, hedonic adaptation, self-efficacy, etc.). |
+| 4 (Disciplinary terminology) | Participant design specifications, survey items, and effect-model descriptions require accurate use of terms (well-being, hedonic adaptation, self-efficacy, etc.). |
 | 5 (Academic discussion) | The 5-minute presentation requires supporting claims with evidence from the simulated data. |
 | 6 (Design and conduct inquiry) | The entire workflow. |
 | 7 (Well-being practices) | Students who study a well-being practice (gratitude, mindfulness, etc.) must understand it well enough to specify how it should influence responses. |
