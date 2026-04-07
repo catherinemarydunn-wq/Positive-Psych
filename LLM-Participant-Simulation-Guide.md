@@ -125,31 +125,55 @@ Frequentist statistics answer a question nobody is asking ("If there were no eff
 
 Bayesian analysis also fits the design/execute split cleanly. Prior specification is a design decision: the student decides what they expect and why. The mechanics (Markov chain Monte Carlo [MCMC] sampling, convergence checking) are the LLM's job. The student never needs to understand the sampling algorithm.
 
+#### Principles
+
+**Build iteratively, not all at once.** Students should not specify a full model and hit go. They start with a simple model (just the main effect), run the full workflow, then add the interaction term and run again. Each addition is a theoretical claim (CLO 1) that the student justifies before adding. This produces a richer presentation (CLO 5) — "I started with X, then added Y, and here is what changed" — and it makes debugging easier: if something breaks, the student knows which addition caused it.
+
+**Use weakly informative priors, not flat priors.** On a 1–7 Likert scale, an effect larger than ±3 points is implausible (it would push ratings off the scale). A flat prior that allows effects of ±100 is not "letting the data speak" — it is assigning probability to impossible values. Weakly informative priors constrain effects to a plausible range while remaining open to the data. Students should justify the *width* of the prior (how uncertain they are), not just the centre (what they expect).
+
+**Visualise at every stage.** Every stage of the workflow produces at least one plot. Describing what a plot shows is a language production opportunity (CLO 4, CLO 5). Comparing plots across stages ("the prior predicted X, but the posterior shows Y") is where interpretation lives.
+
+#### Standard plots
+
+Since all inquiries use Likert-scale survey data, the plot set is predictable. Standardising it simplifies assessment and lets students focus on interpretation rather than visualisation choices. The LLM produces all plots; the student evaluates and describes them.
+
+| Stage | Plot | What the student evaluates |
+|-------|------|---------------------------|
+| 1. Prior predictive check | Histogram of predicted ratings from priors alone (discrete bins, 1–7) | Do predictions stay within the scale? Is there pileup at floor or ceiling? |
+| 2. Fake data check | Parameter recovery: true values (x-axis) vs. posterior estimates with 89% CIs (y-axis). Points should fall near the diagonal. | Did the model recover the known parameters? Which ones did it miss, and why? |
+| 3. Fit | Posterior density plots for each effect parameter | How certain is the model about each effect? How do the posteriors compare to the priors? |
+| 3. Fit | Prior-to-posterior comparison: overlay prior and posterior densities for each effect | What did the data "teach" the model? Where did beliefs shift most? |
+| 4. Posterior predictive check | Overlay of posterior predictive distribution on actual simulated data (histogram, discrete bins) | Does the model capture the shape of the data? |
+| 5. Interpret | Predicted group means with 89% credible intervals, grouped by condition (e.g., practice × cultural background) | What is the headline result? How much uncertainty remains? |
+| 5. Sensitivity | Side-by-side posterior densities under different priors or different effect assumptions | How sensitive are the conclusions to the assumptions? |
+
 #### The Bayesian workflow
 
 The analysis has six stages. The LLM executes all of them; the student specifies and evaluates.
 
 **1. Specify priors — what they expect before seeing the data.**
 
-For each effect in the model, students specify a prior belief about its direction and size, justified from course readings.
+For each effect in the model, students specify a prior belief about its direction and size, justified from course readings. Priors should be *weakly informative*: centred on the expected value, with a width that constrains effects to the plausible range for a 1–7 scale.
 
 - Example: "Based on Emmons & McCullough (2003), I expect gratitude practice to have a positive effect on satisfaction of roughly 0.5–1.0 points on a 7-point scale. I'll use a normal prior centred on 0.7 with standard deviation (SD) 0.3."
-- Example: "I'm genuinely uncertain whether cultural background moderates the gratitude effect. I'll use a prior centred on 0 with SD 0.5."
-- A prior that says "I don't know" (wide, centred on zero) is legitimate. A prior that says "I'm fairly sure" (narrow, off zero) is also legitimate if justified. The student explains which and why.
+- Example: "I'm genuinely uncertain whether cultural background moderates the gratitude effect. I'll use a weakly informative prior centred on 0 with SD 0.5, which keeps the effect within ±1.5 points (99% of the prior mass)."
+- A prior that says "I don't know" (wide, centred on zero) is legitimate but should still be bounded — SD 1.0 on a 7-point scale, not SD 100. A prior that says "I'm fairly sure" (narrow, off zero) is also legitimate if justified. The student explains which and why.
 
 Students also specify the model structure: outcome variable (e.g., satisfaction rating), predictors (e.g., gratitude practice, cultural background, their interaction). The LLM chooses the implementation (PyMC, Stan, or a simpler conjugate approach for straightforward designs).
 
+**Start with a simple model** (just the main effect), then add the interaction after the simple model checks out. Each model addition is a new commit point in the analysis.
+
 **2. Prior predictive check — do the priors produce plausible predictions?**
 
-Before fitting the model to any data, the LLM generates predictions from the priors alone and visualises them. The student evaluates whether these predictions are plausible.
+The LLM generates predictions from the priors alone and produces the **prior predictive histogram** (see standard plots). The student evaluates whether the predictions are plausible.
 
-If the prior predictive distribution shows satisfaction scores below 1 or above 7, or predicts that most participants would rate at ceiling, the priors need adjusting. This is a concrete, visual sanity check that forces the student to confront what their priors actually mean in terms of the outcome they are modelling.
+If the distribution shows satisfaction scores below 1 or above 7, or predicts that most participants would rate at ceiling, the priors need adjusting. This is a concrete, visual sanity check that forces the student to confront what their priors actually mean.
 
 **Where the learning happens:** This is model criticism *before* seeing results. The student is asking "Do my assumptions, taken together, produce a world that makes sense?" This directly serves CLO 2 (critically evaluate empirical research) — if a published study used unreasonable assumptions, this is how one would detect it.
 
 **3. Fake data check — does the analysis pipeline work?**
 
-This step validates the inference machinery *before* it touches the simulated data from Step 4. The LLM generates fake data directly from the Bayesian model (priors + likelihood) with known parameter values, fits the model to that fake data, and checks whether the fitted model recovers the known parameters.
+This step validates the inference machinery *before* it touches the simulated data from Step 4. The LLM generates fake data directly from the Bayesian model (priors + likelihood) with known parameter values, fits the model to that fake data, and produces the **parameter recovery plot** (see standard plots).
 
 This is distinct from the simulated data produced in Step 4 of the workflow. The simulated data comes from the Python effect model and plays the role of "observed" data in this exercise. Fake data comes from the Bayesian model itself. The two data-generating processes are different, and this is the point: if the Bayesian model cannot recover known parameters from its own fake data, it will not produce trustworthy results from any data, simulated or real.
 
@@ -157,26 +181,30 @@ This is distinct from the simulated data produced in Step 4 of the workflow. The
 
 **4. Fit the model to the simulated data.**
 
-The LLM fits the Bayesian regression to the simulation output from Step 4. The student does not need to understand MCMC internals. The LLM reports posterior distributions of each effect, credible intervals (e.g., 89% CI), and the probability that each effect is in the expected direction.
+The LLM fits the Bayesian regression to the simulation output from Step 4 and produces the **posterior density plots** and **prior-to-posterior comparisons** (see standard plots). The student does not need to understand MCMC internals. The LLM reports posterior distributions of each effect, credible intervals (e.g., 89% CI), and the probability that each effect is in the expected direction.
 
 **5. Posterior predictive check — do the model's predictions match the data?**
 
-After fitting, the LLM generates predictions from the posterior and overlays them on the actual simulation data. The student evaluates whether the model captures the patterns in the data.
+The LLM generates predictions from the posterior and produces the **posterior predictive overlay** (see standard plots). The student evaluates whether the model captures the patterns in the data.
 
-Since the data is simulated with known effects, a mismatch here means something is wrong in either the simulation code or the Bayesian model specification. But the visual comparison also builds the habit of checking model fit rather than blindly trusting output.
+Since the data is simulated with known effects, a mismatch here means something is wrong in either the simulation code or the Bayesian model specification. But the visual comparison builds the habit of checking model fit rather than blindly trusting output.
 
 **6. Interpret and probe.**
 
-Bayesian results produce statements like:
+The LLM produces the **predicted group means plot** (see standard plots). Bayesian results produce statements like:
 
 - "There is a 94% probability that gratitude practice increases satisfaction ratings (median effect: 0.72 points, 89% CI [0.38, 1.09])."
 - "The probability that cultural background moderates the gratitude effect is 68%, with the moderation estimate centred near −0.25 (89% CI [−0.61, 0.14])."
 
-**Where the learning happens:** The first statement suggests a fairly confident positive effect. The second suggests genuine uncertainty — the credible interval includes zero, so the data are compatible with no moderation. What would it take to resolve that uncertainty? A larger sample? A different operationalisation of "cultural background"? That reasoning is the student's.
+**Type S and Type M errors.** For each effect, students should also ask:
+- **Type S (sign):** What is the probability that the effect is in the *wrong direction*? If there is a 6% chance the effect is negative when the student predicted positive, that is a 6% Type S error rate.
+- **Type M (magnitude):** If the effect is real, how much could the estimate exaggerate it? The LLM can compute the ratio of the posterior median to the assumed true effect. A ratio of 2.0 means the estimate could be twice the true value.
 
-**Sanity checks.** Are the posterior effect sizes close to what the student specified in the simulation? They should be, since the effects were built in. If the posteriors recover the assumed effects, the model is working. If not, something is wrong in the code or model specification.
+These replace "significant/not significant" with questions that matter: "Could I be wrong about the direction?" and "Could I be wrong about how big this is?" Students report both alongside the credible intervals.
 
-**Sensitivity analysis.** The most interesting analytical move is changing a prior or an effect assumption and rerunning. What if a sceptical prior (centred on zero) is used for the main effect? Does the posterior still show a positive effect, or does it collapse? What if the cultural moderation were twice as large? The student specifies what to vary and why; the LLM reruns and produces comparison output. Interpreting why the posteriors did or did not change is where the learning happens.
+**Where the learning happens:** The first example statement suggests a fairly confident positive effect with low Type S risk. The second suggests genuine uncertainty — the credible interval includes zero, so the data are compatible with no moderation. What would it take to resolve that uncertainty? A larger sample? A different operationalisation of "cultural background"? That reasoning is the student's.
+
+**Sensitivity analysis.** The most interesting analytical move is changing a prior or an effect assumption and rerunning. The LLM produces the **sensitivity comparison plot** (see standard plots). What if a sceptical prior (centred on zero) is used for the main effect? Does the posterior still show a positive effect, or does it collapse? What if the cultural moderation were twice as large? The student specifies what to vary and why; the LLM reruns and produces comparison output. Interpreting why the posteriors did or did not change — and whether Type S and Type M errors shift — is where the learning happens.
 
 ### Step 6: Report
 
