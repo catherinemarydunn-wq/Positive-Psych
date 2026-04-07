@@ -311,7 +311,7 @@ The methodology creates communicative demand across all four skills. The table b
 | Speaking | Group design discussions, negotiating design choices, presentation, Q&A defence | Presentation recording, oral defence responses |
 | Listening | Responding to group members' proposals, incorporating Q&A feedback | Quality of uptake in spoken responses and revised work |
 
-LLM use is natural for mechanical execution (generating profiles, writing code, drafting Method). LLM use is not natural for the communicative acts listed above — those require the student's own language because they involve judgment, evaluation, and argumentation specific to the project. The assessment evaluates language where language naturally happens, not where it has been artificially required.
+Students may use LLMs throughout — including for the communicative acts listed above. The LLM is a thinking partner for drafting justifications, challenging design choices, refining arguments, and articulating interpretations. The distinction is not "LLM tasks vs. human tasks" but accountability: the student must be able to defend the choices, understand the reasoning, and stand behind the output. The capturable artifacts above are what the student is accountable for, however they were produced.
 
 ## Connection to course learning outcomes
 
