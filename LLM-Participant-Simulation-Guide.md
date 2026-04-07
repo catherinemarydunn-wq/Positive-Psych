@@ -285,8 +285,6 @@ Students who do sensitivity analysis should do prior sensitivity first. Effect-s
 
 The report has sections that are primarily descriptive and sections that require judgment.
 
-The report has sections that are primarily descriptive and sections that require judgment.
-
 **LLM drafts, student evaluates and revises:**
 1. **Research question** (1–2 sentences) — formulated in Step 1; the LLM can polish wording.
 2. **Method** — describes decisions already made in Steps 2–4, plus the analysis pipeline validation. The LLM drafts directly from the design specifications and code. The student checks accuracy and completeness. Should specify the LLM used, the random seed, and the number of participants.
@@ -324,6 +322,14 @@ Students may use LLMs throughout — including for the communicative acts listed
 | 5 (Academic discussion) | The 5-minute presentation uses a standardised Quarto Reveal.js template (`inquiry-presentation-template.qmd`) with designated slides for each report section. Plots are embedded from source code, so results cannot drift from the analysis. The student customises the content; the template provides the structure. |
 | 6 (Design and conduct inquiry) | The entire workflow. |
 | 7 (Well-being practices) | Students who study a well-being practice (gratitude, mindfulness, etc.) must understand it well enough to specify its expected effects and evaluate whether the simulation output is plausible. |
+
+## Assessment instruments
+
+The following documents specify how the inquiry is assessed. They are separate from this methodology guide so that instructors can adapt assessment without rewriting the workflow.
+
+- **`inquiry-reading-test.md`** — Source verification reading test. Assesses the reading skills students exercise when working with LLMs: checking claims against sources, catching errors, evaluating whether conclusions follow from evidence. Individually administered, no LLM access.
+- **`inquiry-portfolio-spec.md`** — LLM interaction portfolio specification. Students curate conversation logs from the inquiry workflow as evidence of their actual language use. Individually submitted. Parallels the GEAP 103 portfolio model.
+- **`inquiry-rubric.md`** — Grading criteria for the report, presentation, and oral defence.
 
 ## Provenance
 
