@@ -59,20 +59,22 @@ Decide what characteristics your simulated participants should have and how thos
 
 ### Step 3: Design your instrument
 
-Write 5–8 survey items that measure the construct you are studying. Use a consistent response scale (e.g., 1–7 Likert, where 1 = strongly disagree and 7 = strongly agree).
+Specify what your survey should measure, how, and why. The LLM generates the items; you make the design decisions.
 
-**Example items (for a gratitude and well-being inquiry):**
-1. I frequently feel thankful for the people in my life. (1–7)
-2. When something good happens, I tend to take it for granted. (1–7, reverse-scored)
-3. I feel satisfied with my life overall. (1–7)
-4. I often compare my situation to people who have more than me. (1–7, reverse-scored)
-5. I experience positive emotions (joy, contentment, hope) on most days. (1–7)
+**What to specify:**
+- **Constructs.** Which psychological constructs does your research question require you to measure? (e.g., gratitude, life satisfaction, hedonic adaptation). Justify each from your course readings.
+- **Scale.** What response format? (e.g., 1–7 Likert, where 1 = strongly disagree and 7 = strongly agree). Why that scale?
+- **Item count.** How many items per construct? More items per construct = more reliable measurement, but the instrument gets longer. Ask the LLM what is standard for the constructs you are measuring.
+- **Reverse-scored items.** Require at least some. These check that the model produces internally consistent responses, not just all 7s.
+- **Item quality constraints.** Each item should measure one thing ("I feel grateful and happy" conflates two constructs). Items should be at a language level your simulated population would understand.
 
-Store items in a CSV file (`items/survey_items.csv`) with columns for `item_id`, `item_text`, `construct`, and `reverse_scored`.
+**Example specification (for a gratitude × cultural background inquiry):**
 
-**Design principles:**
-- Include at least one reverse-scored item (a check that the model produces internally consistent responses, not just all 7s).
-- Each item should measure one thing. "I feel grateful and happy" conflates two constructs.
+> Generate a survey instrument as a CSV file with columns for item_id, item_text, construct, and reverse_scored. I need items measuring two constructs: gratitude (8 items, including 2 reverse-scored) and life satisfaction (6 items, including 2 reverse-scored). Use a 1–7 Likert scale. Items should be written at a B2 English level. Base the items on established instruments (GQ-6 for gratitude, SWLS for satisfaction) but do not copy them verbatim.
+
+**The student's job is the specification.** Deciding to measure gratitude and satisfaction (rather than, say, flow and meaning) is a design choice that follows from the research question. Deciding on 8 + 6 items with reverse scoring is a methodological choice. Writing 14 individual item stems is mechanical work the LLM handles. The student should review the generated items and revise any that are unclear, double-barrelled, or off-construct — that evaluation is the skill being practised.
+
+Store items in a CSV file (`items/survey_items.csv`).
 
 ### Step 4: Build the simulation
 
