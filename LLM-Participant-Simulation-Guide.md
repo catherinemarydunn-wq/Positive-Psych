@@ -61,16 +61,15 @@ The guide does not prescribe a single approach. Instructors should decide based 
 
 The workflow has six steps. In each, the left column is the student's intellectual contribution; the right column is what the LLM executes.
 
-| Step | Student decides | LLM executes |
-|------|----------------|--------------|
-| 1. Research question | What to investigate and why | — |
-| 2. Participant design | Characteristics, distributions, sample size, rationale | Generates YAML profiles |
-| 3. Instrument design | Constructs, item count, scale, reverse scoring, rationale | Generates survey items as CSV |
-| 4. Simulation | Effect directions, sizes, justifications from readings | Writes/adapts Python; runs simulation |
-| 5. Analysis | Priors, prior predictive evaluation, fake data check, comparisons, sensitivity | Validates pipeline on fake data; fits model to simulated data; produces checks, posteriors, plots |
-| 6. Report | Discussion reasoning, limitations | Drafts Method/Results from artifacts |
-
-At every step, the student reviews and revises LLM output.
+| Step | Student decides | LLM executes | Student reviews |
+|------|----------------|--------------|-----------------|
+| 1. Research question | What to investigate and why | — | — |
+| 2. Participant design | Characteristics, distributions, sample size, rationale | Generates YAML profiles + distribution summary | Verifies distributions match spec (spot-check, not individual profiles) |
+| 3. Instrument design | Constructs, item count, scale, reverse scoring, rationale | Generates survey items as CSV | Reviews every item; flags double-barrelled, off-construct, or unclear items; iterates |
+| 4. Simulation | Effect directions, sizes, justifications from readings | Writes/adapts Python; runs simulation | Reviews code against spec; flags mismatches; iterates |
+| **Pre-registration checkpoint** | *Commit the design specification (Steps 1–4 + priors) before running the analysis* | | |
+| 5. Analysis | Priors, prior predictive evaluation, fake data check, comparisons, sensitivity | Validates pipeline on fake data; fits model to simulated data; produces checks, posteriors, plots | Evaluates every plot and posterior summary (see standard plots) |
+| 6. Report | Discussion reasoning, limitations | Drafts Method/Results from artifacts | Checks drafted prose against actual output; revises |
 
 ### Step 1: Research question
 
@@ -105,11 +104,13 @@ Students specify the population; the LLM generates the profiles. Profiles are st
 > - `gratitude_duration_months` (1–6 for journaling participants, 0 for others)
 > - `random_seed` (unique integer per participant)
 
-**Where the learning happens:** Deciding that cultural background should be split into equal thirds (rather than proportional to the actual student body) is a design choice that needs justifying. Deciding that well-being baseline should be 20/60/20 is a modelling assumption. These are the decisions the student defends. Generating 300 YAML files from that specification is mechanical.
+**Review:** Students do not review 300 individual profiles. Instead, the LLM produces a distribution summary alongside the profiles (counts by cultural background, age histogram, practice-group balance, etc.). The student checks that the summary matches the specification. If distributions are off — for example, cultural backgrounds are not balanced across practice conditions — the student flags the problem and the LLM regenerates.
+
+**Where the learning happens:** Deciding that cultural background should be split into equal thirds (rather than proportional to the actual student body) is a design choice that needs justifying. Deciding that well-being baseline should be 20/60/20 is a modelling assumption. These are the decisions the student defends. Generating 300 YAML files from that specification is mechanical. Verifying that the generated profiles actually implement the specification is a quality check the student must do.
 
 ### Step 3: Instrument design
 
-Students specify what to measure, how, and why. The LLM generates the items. The study design is a survey: participants respond to Likert-scale items measuring one or more psychological constructs.
+Students specify what to measure, how, and why. The LLM generates the items. The student reviews every generated item, flags problems, and iterates until the instrument is sound. The study design is a survey: participants respond to Likert-scale items measuring one or more psychological constructs.
 
 **What students specify:**
 - **Constructs.** Which psychological constructs does the research question require? (e.g., gratitude, life satisfaction, hedonic adaptation). Justified from course readings.
@@ -122,7 +123,9 @@ Students specify what to measure, how, and why. The LLM generates the items. The
 
 > Generate a survey instrument as a comma-separated values (CSV) file with columns for item_id, item_text, construct, and reverse_scored. I need items measuring two constructs: gratitude (8 items, including 2 reverse-scored) and life satisfaction (6 items, including 2 reverse-scored). Use a 1–7 Likert scale. Items should be written at a B2 English level. Base the items on established instruments (GQ-6 for gratitude, SWLS for satisfaction) but do not copy them verbatim.
 
-**Where the learning happens:** Deciding to measure gratitude and satisfaction (rather than flow and meaning) follows from the research question. Deciding on 8 + 6 items with reverse scoring is a methodological choice. Writing 14 item stems is mechanical. Reviewing the generated items and revising any that are unclear, double-barrelled, or off-construct — that evaluation is the skill being practised.
+**Review:** Unlike participant profiles, the item set is small enough to review in full. For each generated item, students ask: Does it measure the intended construct? Does it measure only one thing? Is it clear at B2 level? Do the reverse-scored items genuinely reverse the construct? Items that fail are flagged and the LLM regenerates them. This review-revise loop may take 2–3 iterations.
+
+**Where the learning happens:** Deciding to measure gratitude and satisfaction (rather than flow and meaning) follows from the research question. Deciding on 8 + 6 items with reverse scoring is a methodological choice. Writing 14 item stems is mechanical. Evaluating whether each generated item actually measures what it claims to — and articulating why a double-barrelled or off-construct item is flawed — is the skill being practised.
 
 ### Step 4: Simulation
 
@@ -142,9 +145,27 @@ Students give the LLM their full design specification and have it handle profile
 5. Constrain ratings to the scale
 6. Output a CSV file with one row per participant–item pair
 
-**Where the learning happens:** Deciding that gratitude practice should add ~0.8 to satisfaction ratings is a claim about the world that the student justifies from course readings (e.g., "Emmons & McCullough, 2003, found a medium effect"). Deciding that collectivist cultural background moderates that effect is a theoretical commitment. The LLM translates these into code. The student reviews the generated code to confirm it implements what they specified.
+**Review:** The student reviews the generated code against the specification. Does `compute_base_rating` implement the effects the student specified? Are the effect sizes correct? Is the noise model reasonable? If the code diverges from the spec — for example, the LLM added an effect the student did not specify, or misunderstood the direction of a moderation — the student flags the discrepancy and the LLM revises.
+
+**Where the learning happens:** Deciding that gratitude practice should add ~0.8 to satisfaction ratings is a claim about the world that the student justifies from course readings (e.g., "Emmons & McCullough, 2003, found a medium effect"). Deciding that collectivist cultural background moderates that effect is a theoretical commitment. The LLM translates these into code. Confirming that the code actually implements what was specified — and catching cases where it doesn't — is a critical evaluation skill.
 
 **Reproducibility:** Same random seed must produce identical output. Students record the seed, the LLM and version used, and any prompts given.
+
+### Pre-registration checkpoint
+
+Before running the analysis, the group commits their design specification as a record of what was planned before results were seen. This includes:
+
+- Research question (Step 1)
+- Participant design specification (Step 2)
+- Final reviewed instrument (Step 3)
+- Effect model specification with justifications (Step 4)
+- Prior specification with justifications (Stage 1 of Step 5)
+
+If the group uses a git repository, a tagged commit is the natural mechanism. Otherwise, a timestamped document works.
+
+With simulated data, there is nothing to "hack" — the student built the effects in and knows what the results should be. The point is not fraud prevention but the discipline of separating planning from analysis. In real research, this separation prevents post-hoc rationalisation (changing the analysis after seeing results and presenting the change as if it were planned). Practising the discipline now, even in a context where it is not strictly necessary, prepares students for contexts where it is (CLO 2, CLO 6).
+
+Changes to the analysis plan after the checkpoint (for example, adding a predictor suggested by the results) are allowed but must be disclosed in the report as post-hoc. The distinction between planned and exploratory analysis is itself a learning target.
 
 ### Step 5: Analysis
 
@@ -259,7 +280,7 @@ The report has sections that are primarily descriptive and sections that require
 | CLO | How the simulation addresses it |
 |---|---|
 | 1 (Theoretical frameworks) | Students operationalise a framework (PERMA, SDT, broaden-and-build, etc.) by specifying what to measure, what effects to model, and justifying effect sizes from the literature. |
-| 2 (Critical evaluation) | Prior predictive checks, fake data recovery checks, and posterior predictive checks teach model criticism: evaluating whether assumptions produce plausible predictions, whether the analysis pipeline can recover known effects, and whether a fitted model captures the data. |
+| 2 (Critical evaluation) | Prior predictive checks, fake data recovery checks, and posterior predictive checks teach model criticism. The pre-registration checkpoint teaches the distinction between planned and exploratory analysis. |
 | 3 (Academic texts) | The report requires citing course readings to justify the research question, the effect model, the priors, and the interpretation. |
 | 4 (Disciplinary terminology) | Design specifications, evaluation of generated items, effect-model justifications, and the report all require accurate use of terms (well-being, hedonic adaptation, self-efficacy, etc.). |
 | 5 (Academic discussion) | The 5-minute presentation uses a standardised Quarto Reveal.js template (`inquiry-presentation-template.qmd`) with designated slides for each report section. Plots are embedded from source code, so results cannot drift from the analysis. The student customises the content; the template provides the structure. |
