@@ -231,7 +231,7 @@ The report has sections that are primarily descriptive and sections that require
 | 2 (Critical evaluation) | Prior predictive checks, fake data recovery checks, and posterior predictive checks teach model criticism: evaluating whether assumptions produce plausible predictions, whether the analysis pipeline can recover known effects, and whether a fitted model captures the data. |
 | 3 (Academic texts) | The report requires citing course readings to justify the research question, the effect model, the priors, and the interpretation. |
 | 4 (Disciplinary terminology) | Design specifications, evaluation of generated items, effect-model justifications, and the report all require accurate use of terms (well-being, hedonic adaptation, self-efficacy, etc.). |
-| 5 (Academic discussion) | The 5-minute presentation requires supporting claims with evidence from the simulated data. |
+| 5 (Academic discussion) | The 5-minute presentation uses a standardised Quarto Reveal.js template (`inquiry-presentation-template.qmd`) with designated slides for each report section. Plots are embedded from source code, so results cannot drift from the analysis. The student customises the content; the template provides the structure. |
 | 6 (Design and conduct inquiry) | The entire workflow. |
 | 7 (Well-being practices) | Students who study a well-being practice (gratitude, mindfulness, etc.) must understand it well enough to specify its expected effects and evaluate whether the simulation output is plausible. |
 

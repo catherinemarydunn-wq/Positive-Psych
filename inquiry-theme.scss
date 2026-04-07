@@ -1,0 +1,53 @@
+/*-- scss:defaults --*/
+
+$font-family-sans-serif: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$presentation-font-size-root: 32px;
+$presentation-h1-font-size: 1.4em;
+$presentation-h2-font-size: 1.2em;
+$body-color: #2d2d2d;
+$link-color: #2a6496;
+
+/*-- scss:rules --*/
+
+.reveal .slide-number {
+  font-size: 0.6em;
+  color: #888;
+}
+
+.reveal .callout {
+  font-size: 0.85em;
+  margin-top: 0.5em;
+}
+
+.reveal .callout-note {
+  border-left-color: #2a6496;
+}
+
+.reveal .callout-tip {
+  border-left-color: #3a7d3a;
+}
+
+.reveal table {
+  font-size: 0.8em;
+  margin-top: 0.5em;
+}
+
+.reveal th {
+  background-color: #f0f0f0;
+  font-weight: 600;
+}
+
+.reveal .incremental li {
+  margin-bottom: 0.4em;
+}
+
+/* Keep code blocks small and unobtrusive — the code
+   is not the point; the output is */
+.reveal pre {
+  font-size: 0.55em;
+  max-height: 200px;
+}
+
+.reveal .notes {
+  font-size: 0.7em;
+}

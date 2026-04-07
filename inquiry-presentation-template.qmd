@@ -1,0 +1,173 @@
+---
+title: "Mini Inquiry Presentation"
+subtitle: "[Research question goes here]"
+author: "[Student name]"
+date: today
+format:
+  revealjs:
+    theme: [default, inquiry-theme.scss]
+    slide-number: true
+    transition: none
+    width: 1050
+    height: 700
+    fig-align: center
+    code-fold: true
+    embed-resources: true
+execute:
+  echo: false
+  warning: false
+---
+
+## Research Question
+
+::: {.callout-note appearance="minimal"}
+State your research question in 1–2 sentences. It should connect a positive psychology concept to a characteristic that varies across people.
+:::
+
+<!-- Example: Does the relationship between gratitude practice and
+reported life satisfaction differ by cultural background? -->
+
+## Why This Question
+
+- Which course readings motivated this question?
+- Which theoretical framework does it operationalise?
+- Why does the characteristic you chose matter?
+
+::: {.notes}
+Cite at least two course readings here. This is where CLO 1
+(theoretical frameworks) and CLO 3 (academic texts) are assessed.
+:::
+
+## Participant Design
+
+- **Sample size:** [N] participants
+- **Key characteristics:** [list with distributions and rationale]
+- **Independent variable:** [how participants were split across conditions]
+
+::: {.callout-tip appearance="minimal"}
+Explain one design choice and why you made it. For example: "I split cultural backgrounds into equal thirds rather than proportional to the student body because..."
+:::
+
+## Survey Instrument
+
+- **Constructs measured:** [e.g., gratitude (8 items), life satisfaction (6 items)]
+- **Scale:** [e.g., 1–7 Likert]
+- **Reverse-scored items:** [how many and why]
+
+Show 1–2 example items to illustrate what you measured.
+
+## Effect Model
+
+What effects did you build into the simulation, and why?
+
+| Effect | Size | Justification |
+|--------|------|---------------|
+| [Main effect] | [e.g., +0.8] | [Reading and reasoning] |
+| [Moderation] | [e.g., −0.3] | [Reading and reasoning] |
+
+::: {.notes}
+Every number here is a claim about the world. Be ready to
+defend each one from the course readings.
+:::
+
+## Prior Predictive Check
+
+Did your priors produce plausible predictions?
+
+```{python}
+# Replace with your prior predictive plot code
+# The LLM that ran your analysis can provide this
+```
+
+::: {.callout-note appearance="minimal"}
+Describe what the plot shows. Do the predictions stay within 1–7? Is there pileup at floor or ceiling?
+:::
+
+## Fake Data Recovery
+
+Did the analysis pipeline recover the known parameters?
+
+```{python}
+# Replace with your parameter recovery plot code
+```
+
+::: {.callout-note appearance="minimal"}
+Do the points fall near the diagonal? Which parameters were recovered well? Which were not, and why?
+:::
+
+## Results: Posteriors
+
+```{python}
+# Replace with your posterior density plot code
+```
+
+::: {.callout-note appearance="minimal"}
+For each effect, report: posterior median, 89% credible interval, probability that the effect is in the expected direction.
+:::
+
+## Results: Prior to Posterior
+
+```{python}
+# Replace with your prior-to-posterior comparison plot code
+```
+
+What did the data "teach" the model? Where did beliefs shift most?
+
+## Results: Group Means
+
+```{python}
+# Replace with your predicted group means plot code
+```
+
+This is the headline result. Describe the pattern and the remaining uncertainty.
+
+## Type S and Type M
+
+For each effect:
+
+| Effect | P(wrong sign) | Exaggeration ratio |
+|--------|---------------|--------------------|
+| [Main effect] | [e.g., 6%] | [e.g., 1.2×] |
+| [Moderation] | [e.g., 32%] | [e.g., 2.1×] |
+
+What do these tell you about how confident you should be?
+
+## Posterior Predictive Check
+
+```{python}
+# Replace with your posterior predictive overlay plot code
+```
+
+Does the model capture the shape of the data?
+
+## Sensitivity Analysis
+
+```{python}
+# Replace with your sensitivity comparison plot code
+```
+
+What did you change, and what happened? How sensitive are your conclusions to your assumptions?
+
+## Discussion
+
+- What do the patterns suggest about your research question?
+- What assumptions drive the result?
+- What would you do differently with real participants?
+
+## Limitations
+
+::: {.incremental}
+- The data reflects the effect model I built, not human psychology.
+- My priors influence the posteriors: [explain how].
+- [If applicable:] The LLM helped set effect sizes, which may encode stereotypes.
+- The simulation cannot surprise the way real data can.
+:::
+
+::: {.notes}
+This slide is where the deepest thinking lives. Do not rush it.
+:::
+
+## References
+
+::: {#refs}
+:::
