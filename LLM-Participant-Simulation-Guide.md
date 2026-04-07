@@ -2,15 +2,20 @@
 
 ## Purpose
 
-The Mini Inquiry Project (CLO 6) asks students to design and conduct a small inquiry using AI tools. This guide describes a method for that inquiry: building a simulation that generates synthetic participant responses to well-being survey items. Students specify a research design (what characteristics to vary, what distributions, what effects to model, what analyses to run), then use an LLM to generate profiles, write simulation code, produce analyses, and draft descriptive sections of the report. The student's work is the design decisions, the evaluation of LLM output, and the interpretation.
+This document proposes a methodology for the Mini Inquiry Project (CLO 6): LLM-based participant simulation. Students build a simulation that generates synthetic survey responses, analyse the output using Bayesian statistics, and report on the results. The method teaches the full research workflow (operationalisation, measurement, simulation, analysis, interpretation) without requiring ethics approval, participant recruitment, or data collection infrastructure.
 
-This method teaches the full research workflow (operationalisation, measurement, simulation, analysis, interpretation) without requiring ethics approval, participant recruitment, or data collection infrastructure.
+The core principle throughout is that **students make design decisions and the LLM handles execution**. At every step, the student specifies what and why; the LLM generates profiles, writes code, runs analyses, and drafts descriptive prose. The student evaluates LLM output and provides the interpretation.
+
+A reference Python script (`simulate_wellbeing.py`) is included. If the LLM tool students use supports sub-agent orchestration (e.g., Copilot CLI's `/fleet`), the entire workflow from profile generation through analysis can be dispatched as parallel subtasks from a single design specification.
 
 ## What this is (and what it is not)
 
-**This is a methods exercise.** The simulated data reflects modelling assumptions that the student makes explicit in code, not the psychology of actual humans. Any "findings" are hypotheses worth testing with real participants, not conclusions about human well-being.
+**This is a methods exercise.** The simulated data reflects modelling assumptions that the student makes explicit, not the psychology of actual humans. Any "findings" are hypotheses worth testing with real participants, not conclusions about human well-being.
 
-**The learning targets are:**
+**This is not empirical research on human psychology.** The word "inquiry" is deliberate. Students are not conducting experiments, and the report should not claim to have discovered facts about people. The correct framing is: "Given these modelling assumptions, the simulation produced these patterns. Here is what that suggests we should investigate with real participants."
+
+### Learning targets
+
 - Translating a research question into measurable variables
 - Specifying a participant population: what characteristics matter, what their distributions should look like, and why
 - Specifying what constructs to measure and evaluating whether generated items actually measure them
@@ -20,31 +25,42 @@ This method teaches the full research workflow (operationalisation, measurement,
 - Evaluating and revising LLM-generated output at every stage (profiles, items, code, analysis, prose)
 - Articulating the limitations of a data source honestly
 
-**This is not empirical research on human psychology.** The word "inquiry" is deliberate. Students are not conducting experiments, and the report should not claim to have discovered facts about people. The correct framing is: "Given these modelling assumptions, the simulation produced these patterns. Here is what that suggests we should investigate with real participants."
-
 ## The workflow
 
-### Step 1: Define a research question
+The workflow has six steps. In each, the left column is the student's intellectual contribution; the right column is what the LLM executes.
 
-Start with a question that connects two things: a positive psychology concept from the course and a characteristic that varies across people.
+| Step | Student decides | LLM executes |
+|------|----------------|--------------|
+| 1. Research question | What to investigate and why | — |
+| 2. Participant design | Characteristics, distributions, sample size, rationale | Generates YAML profiles |
+| 3. Instrument design | Constructs, item count, scale, reverse scoring, rationale | Generates item stems as CSV |
+| 4. Simulation | Effect directions, sizes, justifications from readings | Writes/adapts Python; runs simulation |
+| 5. Analysis | Priors, comparisons, what to vary in sensitivity analysis | Fits Bayesian model; produces posteriors, plots |
+| 6. Report | Discussion reasoning, limitations | Drafts Method/Results from artifacts |
+
+At every step, the student reviews and revises LLM output.
+
+### Step 1: Research question
+
+Students start with a question that connects a positive psychology concept from the course to a characteristic that varies across people.
 
 **Examples:**
 - Does the relationship between gratitude practice and reported well-being differ by cultural background?
 - Do younger and older adults report different levels of flow in academic vs. leisure activities?
 - Does growth mindset predict different responses to setback scenarios across education levels?
 
-The question should be specific enough to operationalise. "Is happiness good?" is not a research question. "Do people who score higher on hedonic adaptation report lower satisfaction with repeated positive events?" is.
+The question must be specific enough to operationalise. "Is happiness good?" is not a research question. "Do people who score higher on hedonic adaptation report lower satisfaction with repeated positive events?" is.
 
-### Step 2: Specify the participant design
+### Step 2: Participant design
 
-Decide what characteristics your simulated participants should have and how those characteristics should be distributed. You are not writing individual profiles; you are specifying the population, and the LLM will generate the profiles.
+Students specify the population; the LLM generates the profiles.
 
-**What to specify:**
-- **Sample size.** Choose a number large enough for your analysis to be meaningful. With code, there is no practical cost to generating 200 or 500 participants. Larger samples produce narrower credible intervals (more precise estimates). Ask the LLM what sample size gives useful precision for the effect size you expect.
-- **Characteristics and distributions.** Which demographic and psychological variables matter for your research question? What should their distributions look like?
-- **Your independent variable.** How should participants be split across conditions?
+**What students specify:**
+- **Sample size.** There is no practical cost to generating hundreds of participants. Larger samples produce narrower credible intervals. Students should ask the LLM what sample size gives useful precision for the effect size they expect.
+- **Characteristics and distributions.** Which demographic and psychological variables matter for the research question? What should their distributions look like?
+- **Independent variable.** How should participants be split across conditions?
 
-**Example specification (for a gratitude × cultural background inquiry):**
+**Example specification:**
 
 > Generate 300 participant profiles as YAML files. Each participant should have:
 > - `participant_id` (P001–P300)
@@ -57,75 +73,73 @@ Decide what characteristics your simulated participants should have and how thos
 > - `gratitude_duration_months` (1–6 for journaling participants, 0 for others)
 > - `random_seed` (unique integer per participant)
 
-**The student's job is the design, not the data entry.** Deciding that cultural background should be split into equal thirds (rather than proportional to the actual student body) is a design choice that needs justifying. Deciding that well-being baseline should be 20/60/20 is a modelling assumption. These decisions are where the learning happens. Generating 300 YAML files from that specification is mechanical work that the LLM does.
+**Where the learning happens:** Deciding that cultural background should be split into equal thirds (rather than proportional to the actual student body) is a design choice that needs justifying. Deciding that well-being baseline should be 20/60/20 is a modelling assumption. These are the decisions the student defends. Generating 300 YAML files from that specification is mechanical.
 
-### Step 3: Design your instrument
+### Step 3: Instrument design
 
-Specify what your survey should measure, how, and why. The LLM generates the items; you make the design decisions.
+Students specify what to measure, how, and why. The LLM generates the items.
 
-**What to specify:**
-- **Constructs.** Which psychological constructs does your research question require you to measure? (e.g., gratitude, life satisfaction, hedonic adaptation). Justify each from your course readings.
-- **Scale.** What response format? (e.g., 1–7 Likert, where 1 = strongly disagree and 7 = strongly agree). Why that scale?
-- **Item count.** How many items per construct? More items per construct = more reliable measurement, but the instrument gets longer. Ask the LLM what is standard for the constructs you are measuring.
-- **Reverse-scored items.** Require at least some. These check that the model produces internally consistent responses, not just all 7s.
-- **Item quality constraints.** Each item should measure one thing ("I feel grateful and happy" conflates two constructs). Items should be at a language level your simulated population would understand.
+**What students specify:**
+- **Constructs.** Which psychological constructs does the research question require? (e.g., gratitude, life satisfaction, hedonic adaptation). Justified from course readings.
+- **Scale.** What response format? (e.g., 1–7 Likert). Why that scale?
+- **Item count.** How many items per construct? Students can ask the LLM what is standard for the constructs they are measuring.
+- **Reverse-scored items.** At least some. These check that the model produces internally consistent responses.
+- **Item quality constraints.** Each item should measure one thing. Items should be at a language level the simulated population would understand.
 
-**Example specification (for a gratitude × cultural background inquiry):**
+**Example specification:**
 
 > Generate a survey instrument as a CSV file with columns for item_id, item_text, construct, and reverse_scored. I need items measuring two constructs: gratitude (8 items, including 2 reverse-scored) and life satisfaction (6 items, including 2 reverse-scored). Use a 1–7 Likert scale. Items should be written at a B2 English level. Base the items on established instruments (GQ-6 for gratitude, SWLS for satisfaction) but do not copy them verbatim.
 
-**The student's job is the specification.** Deciding to measure gratitude and satisfaction (rather than, say, flow and meaning) is a design choice that follows from the research question. Deciding on 8 + 6 items with reverse scoring is a methodological choice. Writing 14 individual item stems is mechanical work the LLM handles. The student should review the generated items and revise any that are unclear, double-barrelled, or off-construct — that evaluation is the skill being practised.
+**Where the learning happens:** Deciding to measure gratitude and satisfaction (rather than flow and meaning) follows from the research question. Deciding on 8 + 6 items with reverse scoring is a methodological choice. Writing 14 item stems is mechanical. Reviewing the generated items and revising any that are unclear, double-barrelled, or off-construct — that evaluation is the skill being practised.
 
-Store items in a CSV file (`items/survey_items.csv`).
+### Step 4: Simulation
 
-### Step 4: Build and run the simulation
-
-Give the LLM your full design specification (research question, participant design, instrument, effect assumptions) and have it handle Steps 2–4 as a single workflow. If your LLM tool supports sub-agents (e.g., Copilot CLI's `/fleet` command), it can dispatch profile generation, script writing, and simulation execution as parallel subtasks. Otherwise, a single conversation with the reference script as context works fine.
+Students give the LLM their full design specification and have it handle profile generation, script writing, and execution. If the LLM tool supports sub-agents (e.g., Copilot CLI's `/fleet`), these can run as parallel subtasks.
 
 **Two starting points:**
 
-**Option A: Adapt the reference script.** A reference implementation (`simulate_wellbeing.py`) is provided with this guide. Ask the LLM to modify the effect model to match your research question. For example: "I want cultural_background to influence the base rating for gratitude items. Participants from collectivist backgrounds should show a smaller effect of individual gratitude practice. How should I change the `compute_base_rating` function?"
+**Option A:** Adapt the reference script (`simulate_wellbeing.py`). The effect model section (`compute_base_rating`) is clearly marked as the part to modify.
 
-**Option B: Have the LLM write a script from scratch.** Describe your full design. Give it the reference script as an example of the architecture you want.
+**Option B:** Have the LLM write a script from scratch, using the reference script as an architectural example.
 
 **Either way, the script should:**
 1. Load participant profiles from YAML files
 2. Load survey items from CSV
-3. Compute a base rating for each participant–item pair using explicit effect assumptions (e.g., gratitude practice adds +0.8 to satisfaction items; older participants rate 0.01 lower per year)
-4. Add participant-level random effects (consistent across items for each participant) and residual noise (trial-by-trial variability)
-5. Constrain ratings to the 1–7 scale
-6. Output a CSV with one row per participant–item pair, including participant demographics and ratings
+3. Compute a base rating for each participant–item pair using explicit effect assumptions
+4. Add participant-level random effects and residual noise
+5. Constrain ratings to the scale
+6. Output a CSV with one row per participant–item pair
 
-**The student's job is the effect model specification, not the code.** Deciding that gratitude practice should add ~0.8 to satisfaction ratings is a claim about the world that the student must justify from course readings (e.g., "Emmons & McCullough, 2003, found a medium effect"). Deciding that collectivist cultural background moderates that effect is a theoretical commitment. The LLM translates these specifications into `compute_base_rating()`. The architecture around it (YAML loading, noise model, CSV output) is boilerplate the LLM handles. The student should review the generated code to confirm it implements what they specified.
+**Where the learning happens:** Deciding that gratitude practice should add ~0.8 to satisfaction ratings is a claim about the world that the student justifies from course readings (e.g., "Emmons & McCullough, 2003, found a medium effect"). Deciding that collectivist cultural background moderates that effect is a theoretical commitment. The LLM translates these into code. The student reviews the generated code to confirm it implements what they specified.
 
-**Reproducibility:** Running the script with the same random seed must produce identical output. Record the seed, the LLM and version used to write or adapt the code, and any prompts given.
+**Reproducibility:** Same random seed must produce identical output. Students record the seed, the LLM and version used, and any prompts given.
 
-### Step 5: Analyse the output
+### Step 5: Analysis
 
-The simulation produces a CSV file. Specify what you want to know; the LLM produces the analysis. This course uses **Bayesian statistics**, which answer questions in the form students naturally think in: "How probable is it that this effect is real, and how big is it likely to be?"
+The simulation produces a CSV file. Students specify what they want to know; the LLM produces the analysis.
 
 #### Why Bayesian
 
-Frequentist statistics answer a question nobody asked ("If there were no effect, how often would we see data this extreme?"). Bayesian statistics answer the actual question ("Given the data, how probable is it that gratitude practice increases satisfaction, and by how much?"). For a methods exercise where students are learning to reason about evidence, Bayesian posterior probabilities are both more honest and more intuitive.
+This guide recommends Bayesian statistics for the analysis step. Frequentist statistics answer a question nobody is asking ("If there were no effect, how often would we see data this extreme?"). Bayesian statistics answer the actual question ("Given the data, how probable is it that gratitude practice increases satisfaction, and by how much?"). For a methods exercise where students are learning to reason about evidence, Bayesian posterior probabilities are more honest and more intuitive. The p-value framework actively misleads novices ("not significant" ≠ "no effect"), and introducing it without the context to use it properly would be irresponsible. Bayesian credible intervals say what students think confidence intervals say.
 
-#### What to specify
+Bayesian analysis also fits the design/execute split cleanly. Prior specification is a design decision: the student decides what they expect and why. The mechanics (MCMC sampling, convergence checking) are the LLM's job. The student never needs to understand the sampling algorithm.
 
-The student makes three kinds of decisions. The LLM implements all of them.
+#### What students specify
 
-**Priors — what you expect before seeing the data:**
-- For each effect in your model, specify a prior belief about its direction and size. This is a design decision that the student justifies from course readings.
+**Priors — what they expect before seeing the data:**
+- For each effect in the model, a prior belief about its direction and size, justified from course readings.
 - Example: "Based on Emmons & McCullough (2003), I expect gratitude practice to have a positive effect on satisfaction of roughly 0.5–1.0 points on a 7-point scale. I'll use a normal prior centred on 0.7 with SD 0.3."
 - Example: "I'm genuinely uncertain whether cultural background moderates the gratitude effect. I'll use a prior centred on 0 with SD 0.5."
-- A prior that says "I don't know" (wide, centred on zero) is a legitimate and honest choice. A prior that says "I'm fairly sure" (narrow, centred away from zero) is also legitimate if justified. The student must explain which and why.
+- A prior that says "I don't know" (wide, centred on zero) is legitimate. A prior that says "I'm fairly sure" (narrow, off zero) is also legitimate if justified. The student explains which and why.
 
 **Model — what comparisons to make:**
-- What is the outcome variable? (e.g., mean satisfaction rating)
-- What are the predictors? (e.g., gratitude practice, cultural background, their interaction)
-- Ask the LLM to fit a Bayesian regression using the simulation output. The LLM chooses the implementation (PyMC, Stan, or a simpler conjugate approach for straightforward designs). The student does not need to understand the sampling algorithm.
+- Outcome variable (e.g., mean satisfaction rating)
+- Predictors (e.g., gratitude practice, cultural background, their interaction)
+- The LLM fits a Bayesian regression and chooses the implementation (PyMC, Stan, or a simpler conjugate approach). The student does not need to understand the sampling algorithm.
 
 **Posterior summaries — what to report:**
-- Ask the LLM for posterior distributions of each effect, credible intervals (e.g., 89% CI), and the probability that each effect is in the expected direction.
-- Ask for visualisations: posterior density plots for key effects, and a plot showing the predicted group means with uncertainty.
+- Posterior distributions of each effect, credible intervals (e.g., 89% CI), probability that each effect is in the expected direction.
+- Visualisations: posterior density plots for key effects; predicted group means with uncertainty.
 
 #### Interpreting the output
 
@@ -134,35 +148,35 @@ Bayesian results produce statements like:
 - "There is a 94% probability that gratitude practice increases satisfaction ratings (median effect: 0.72 points, 89% CI: [0.38, 1.09])."
 - "The probability that cultural background moderates the gratitude effect is 68%, with the moderation estimate centred near −0.25 (89% CI: [−0.61, 0.14])."
 
-**The student's job is interpreting what these statements mean for their research question.** The first statement suggests a fairly confident positive effect. The second suggests genuine uncertainty about the moderation — the credible interval includes zero, so the data are compatible with no moderation at all. What would it take to resolve that uncertainty? A larger sample? A different operationalisation of "cultural background"? That reasoning is the student's, not the LLM's.
+**Where the learning happens:** The first statement suggests a fairly confident positive effect. The second suggests genuine uncertainty — the credible interval includes zero, so the data are compatible with no moderation. What would it take to resolve that uncertainty? A larger sample? A different operationalisation of "cultural background"? That reasoning is the student's.
 
-**Sanity checks.** Do the reverse-scored items behave as expected? Are the posterior effect sizes close to what you specified in the simulation? They should be, since you built the effects in. If the posteriors recover your assumed effects, the model is working. If they don't, something is wrong in the code or the model specification.
+**Sanity checks.** Are the posterior effect sizes close to what the student specified in the simulation? They should be, since the effects were built in. If the posteriors recover the assumed effects, the model is working. If not, something is wrong in the code or model specification.
 
-**Sensitivity analysis.** The most interesting analytical move is changing a prior or an effect assumption and rerunning. What if you used a sceptical prior (centred on zero) for the main effect? Does the posterior still show a positive effect, or does it collapse? What if the cultural moderation were twice as large in the simulation? Specify what to vary and why; the LLM reruns and produces comparison output. Interpreting why the posteriors did or did not change is where the learning happens.
+**Sensitivity analysis.** The most interesting analytical move is changing a prior or an effect assumption and rerunning. What if a sceptical prior (centred on zero) is used for the main effect? Does the posterior still show a positive effect, or does it collapse? What if the cultural moderation were twice as large? The student specifies what to vary and why; the LLM reruns and produces comparison output. Interpreting why the posteriors did or did not change is where the learning happens.
 
 ### Step 6: Report
 
-The report has sections that are primarily descriptive and sections that require judgment. The division of labour follows the same principle as every other step.
+The report has sections that are primarily descriptive and sections that require judgment.
 
 **LLM drafts, student evaluates and revises:**
-1. **Research question** (1–2 sentences) — The student formulated this in Step 1. The LLM can polish the wording; the student confirms accuracy.
-2. **Method** — This describes decisions already made in Steps 2–4 (participant design, instrument, effect model, procedure). The LLM can draft this section directly from the design specifications and code. The student checks that the description is accurate and complete. Specify the LLM used, the random seed, and the number of participants.
-3. **Results** — The LLM produced the posterior summaries, credible intervals, and visualisations in Step 5. The student organises them and describes the patterns. A description of what a posterior density plot shows is straightforward; the LLM can draft it, and the student checks it against the actual output.
+1. **Research question** (1–2 sentences) — formulated in Step 1; the LLM can polish wording.
+2. **Method** — describes decisions already made in Steps 2–4. The LLM drafts directly from the design specifications and code. The student checks accuracy and completeness. Should specify the LLM used, the random seed, and the number of participants.
+3. **Results** — the LLM produced the posterior summaries, credible intervals, and visualisations in Step 5. The student organises them and describes the patterns. The LLM can draft descriptions of what the plots show; the student checks against the actual output.
 
-**Student writes, LLM assists:**
-4. **Discussion** — What do the patterns suggest? What assumptions drive the result? What would you change if designing a study with real participants? This is interpretive work. The LLM can help with language, but the reasoning is the student's.
-5. **Limitations** — This section is not optional and is where the deepest thinking lives. At minimum, address:
-   - The data reflects the effect model you built, not human psychology. Different assumptions produce different patterns.
-   - The priors you chose influence the posteriors. If you used informative priors, the results partly reflect your prior beliefs, not just the data. If you used vague priors, the results are more data-driven but may be imprecise.
-   - If you used an LLM to help set effect sizes or priors, those reflect the LLM's training data, which may encode stereotypes or inaccuracies.
-   - The simulation cannot surprise you the way real data can. It confirms or disconfirms the internal logic of your model, not a hypothesis about the world.
+**Student writes, LLM assists with language:**
+4. **Discussion** — What do the patterns suggest? What assumptions drive the result? What would change with real participants? This is interpretive work.
+5. **Limitations** — not optional; this is where the deepest thinking lives. At minimum:
+   - The data reflects the effect model the student built, not human psychology. Different assumptions produce different patterns.
+   - The priors influence the posteriors. Informative priors mean the results partly reflect prior beliefs, not just data. Vague priors are more data-driven but may be imprecise.
+   - If the LLM helped set effect sizes or priors, those reflect its training data, which may encode stereotypes or inaccuracies.
+   - The simulation cannot surprise you the way real data can. It confirms or disconfirms the internal logic of the model, not a hypothesis about the world.
 
 ## Connection to course learning outcomes
 
 | CLO | How the simulation addresses it |
 |---|---|
 | 1 (Theoretical frameworks) | Students operationalise a framework (PERMA, SDT, broaden-and-build, etc.) by specifying what to measure, what effects to model, and justifying effect sizes from the literature. |
-| 3 (Academic texts) | The report requires citing course readings to justify the research question, the effect model, and the interpretation. |
+| 3 (Academic texts) | The report requires citing course readings to justify the research question, the effect model, the priors, and the interpretation. |
 | 4 (Disciplinary terminology) | Design specifications, evaluation of generated items, effect-model justifications, and the report all require accurate use of terms (well-being, hedonic adaptation, self-efficacy, etc.). |
 | 5 (Academic discussion) | The 5-minute presentation requires supporting claims with evidence from the simulated data. |
 | 6 (Design and conduct inquiry) | The entire workflow. |
