@@ -121,16 +121,16 @@ What did the data "teach" the model? Where did beliefs shift most?
 
 This is the headline result. Describe the pattern and the remaining uncertainty.
 
-## Type S and Type M
+## Type S and Magnitude Check
 
 For each effect:
 
-| Effect | P(wrong sign) | Exaggeration ratio |
-|--------|---------------|--------------------|
-| [Main effect] | [e.g., 6%] | [e.g., 1.2×] |
-| [Moderation] | [e.g., 32%] | [e.g., 2.1×] |
+| Effect | P(wrong sign) | Posterior median | Assumed true | Match? |
+|--------|---------------|-----------------|-------------|--------|
+| [Main effect] | [e.g., 6%] | [e.g., 0.74] | [e.g., 0.8] | [Yes/No] |
+| [Moderation] | [e.g., 32%] | [e.g., −0.18] | [e.g., −0.3] | [Approximate] |
 
-What do these tell you about how confident you should be?
+What does the sign-error probability tell you about confidence? If the posterior doesn't match the assumed true value, what went wrong?
 
 ## Posterior Predictive Check
 

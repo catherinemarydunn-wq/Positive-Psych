@@ -16,6 +16,7 @@ A reference Python script (`simulate_wellbeing.py`) is included. If the LLM tool
 
 ### Learning targets
 
+**Research reasoning:**
 - Translating a research question into measurable variables
 - Specifying a participant population: what characteristics matter, what their distributions should look like, and why
 - Specifying what constructs to measure and evaluating whether generated survey items actually measure them
@@ -25,6 +26,13 @@ A reference Python script (`simulate_wellbeing.py`) is included. If the LLM tool
 - Deciding what analytical questions to ask and interpreting posterior probabilities and credible intervals
 - Evaluating and revising LLM-generated output at every stage (profiles, items, code, analysis, prose)
 - Articulating the limitations of a data source honestly
+
+**Academic English production (CLOs 3, 4, 5):**
+- Writing design-choice rationale in connected academic prose (not bullet points)
+- Writing item-review justifications that articulate why a specific item is flawed, using disciplinary terminology
+- Writing the Discussion and Limitations sections of the report independently (LLM assists with language, but the reasoning and the prose are the student's)
+- Describing what plots show in accurate academic English, using disciplinary terms
+- Presenting and defending design decisions orally in the 5-minute presentation
 
 ## Group roles
 
@@ -39,6 +47,16 @@ The Mini Inquiry is a group project (2–3 students). Roles divide responsibilit
 | Interpretation lead | Results interpretation, discussion, limitations | What the posteriors mean, what would change with real participants |
 
 In a pair, two roles merge. Instructors may adjust role definitions to suit their section.
+
+### Individual accountability
+
+Group grades alone do not permit valid inferences about individual achievement. At least one of the following should supplement the group grade:
+
+- **Individual reflection** (300–400 words): each student writes independently about the design decisions they owned, what they would change, and what they learned. Assessed for both content and academic English (register, disciplinary terminology, argument structure).
+- **Oral defence**: each student answers questions about the decisions their role owned during the presentation Q&A. The instructor directs at least one question to each group member.
+- **Structured peer evaluation** with grade adjustment: confidential ratings of each member's contribution, used to adjust individual grades within the group.
+
+The guide does not prescribe which mechanism to use. Instructors decide based on their section. However, the 25% weight requires that some individual component exist.
 
 ### Git roles (formal)
 
@@ -146,7 +164,7 @@ Students give the LLM their full design specification and have it handle profile
 5. Constrain ratings to the scale
 6. Output a CSV file with one row per participant–item pair
 
-**Review:** The student reviews the generated code against the specification. Does `compute_base_rating` implement the effects the student specified? Are the effect sizes correct? Is the noise model reasonable? If the code diverges from the spec — for example, the LLM added an effect the student did not specify, or misunderstood the direction of a moderation — the student flags the discrepancy and the LLM revises.
+**Review:** Students at this level cannot read Python directly. The review works by comparison, not by code reading. The student writes a plain-language specification ("gratitude practice adds 0.8 to satisfaction; cultural background moderates this by −0.3 for collectivist backgrounds"). The LLM generates the code AND a plain-language summary of what the code does. The student compares their specification to the LLM's summary. Discrepancies (the LLM added an effect not specified, misunderstood the direction of a moderation, or omitted a variable) are caught at the summary level, not by inspecting `compute_base_rating`. If the summary matches but the output doesn't, the problem is in the code and the student asks the LLM to diagnose it.
 
 **Where the learning happens:** Deciding that gratitude practice should add ~0.8 to satisfaction ratings is a claim about the world that the student justifies from course readings (e.g., "Emmons & McCullough, 2003, found a medium effect"). Deciding that collectivist cultural background moderates that effect is a theoretical commitment. The LLM translates these into code. Confirming that the code actually implements what was specified — and catching cases where it doesn't — is a critical evaluation skill.
 
@@ -158,7 +176,9 @@ The simulation produces a CSV file. Students specify what they want to know; the
 
 #### Why Bayesian
 
-Frequentist statistics answer a question nobody is asking ("If there were no effect, how often would we see data this extreme?"). Bayesian statistics answer the actual question ("Given the data, how probable is it that gratitude practice increases satisfaction, and by how much?"). For a methods exercise where students are learning to reason about evidence, Bayesian posterior probabilities are more honest and more intuitive. The p-value framework actively misleads novices ("not significant" ≠ "no effect"), and introducing it without the context to use it properly would be irresponsible. Bayesian credible intervals say what students think confidence intervals say.
+For this exercise, Bayesian statistics are a better fit than frequentist methods. Bayesian posteriors answer the question students naturally ask ("How probable is it that gratitude practice increases satisfaction, and by how much?") rather than the question frequentist tests answer ("If there were no effect, how often would we see data this extreme?"). The distinction matters for novices: p-values are routinely misinterpreted as the probability of the hypothesis, while Bayesian credible intervals actually are what students think confidence intervals are.
+
+Published positive psychology research overwhelmingly uses frequentist methods. Students will encounter p-values in every paper they read for this course. The choice of Bayesian analysis here is pragmatic, not ideological: posterior probabilities map more naturally onto the interpretive questions this exercise asks, and prior specification is a design decision that fits the design/execute split. Students should understand that the field uses a different framework and that both exist.
 
 Bayesian analysis also fits the design/execute split cleanly. Prior specification is a design decision: the student decides what they expect and why. The mechanics (Markov chain Monte Carlo [MCMC] sampling, convergence checking) are the LLM's job. The student never needs to understand the sampling algorithm.
 
@@ -170,19 +190,21 @@ Bayesian analysis also fits the design/execute split cleanly. Prior specificatio
 
 **Visualise at every stage.** Every stage of the workflow produces at least one plot. Describing what a plot shows is a language production opportunity (CLO 4, CLO 5). Comparing plots across stages ("the prior predicted X, but the posterior shows Y") is where interpretation lives.
 
+**Minimum viable path.** The full workflow has six analysis stages and seven standard plots. Not all groups will complete all stages. The core that every group must reach is: prior specification, prior predictive check, model fitting, and posterior interpretation (stages 1, 2, 4, and 6). The fake data check (stage 3), posterior predictive check (stage 5), and sensitivity analysis are valuable but optional if time or comprehension is limited. Instructors decide what is required for their section. The standard plots table below marks optional stages.
+
 #### Standard plots
 
 Since all inquiries use Likert-scale survey data, the plot set is predictable. Standardising it simplifies assessment and lets students focus on interpretation rather than visualisation choices. The LLM produces all plots; the student evaluates and describes them.
 
-| Stage | Plot | What the student evaluates |
-|-------|------|---------------------------|
-| 1. Prior predictive check | Histogram of predicted ratings from priors alone (discrete bins, 1–7) | Do predictions stay within the scale? Is there pileup at floor or ceiling? |
-| 2. Fake data check | Parameter recovery: true values (x-axis) vs. posterior estimates with 89% CIs (y-axis). Points should fall near the diagonal. | Did the model recover the known parameters? Which ones did it miss, and why? |
-| 3. Fit | Posterior density plots for each effect parameter | How certain is the model about each effect? How do the posteriors compare to the priors? |
-| 3. Fit | Prior-to-posterior comparison: overlay prior and posterior densities for each effect | What did the data "teach" the model? Where did beliefs shift most? |
-| 4. Posterior predictive check | Overlay of posterior predictive distribution on actual simulated data (histogram, discrete bins) | Does the model capture the shape of the data? |
-| 5. Interpret | Predicted group means with 89% credible intervals, grouped by condition (e.g., practice × cultural background) | What is the headline result? How much uncertainty remains? |
-| 5. Sensitivity | Side-by-side posterior densities under different priors or different effect assumptions | How sensitive are the conclusions to the assumptions? |
+| Stage | Required? | Plot | What the student evaluates |
+|-------|-----------|------|---------------------------|
+| 1. Prior predictive check | **Core** | Histogram of predicted ratings from priors alone (discrete bins, 1–7) | Do predictions stay within the scale? Is there pileup at floor or ceiling? |
+| 2. Fake data check | Optional | Parameter recovery: true values (x-axis) vs. posterior estimates with 89% CIs (y-axis). Points should fall near the diagonal. | Did the model recover the known parameters? Which ones did it miss, and why? |
+| 3. Fit | **Core** | Posterior density plots for each effect parameter | How certain is the model about each effect? How do the posteriors compare to the priors? |
+| 3. Fit | **Core** | Prior-to-posterior comparison: overlay prior and posterior densities for each effect | What did the data "teach" the model? Where did beliefs shift most? |
+| 4. Posterior predictive check | Optional | Overlay of posterior predictive distribution on actual simulated data (histogram, discrete bins) | Does the model capture the shape of the data? |
+| 5. Interpret | **Core** | Predicted group means with 89% credible intervals, grouped by condition (e.g., practice × cultural background) | What is the headline result? How much uncertainty remains? |
+| 5. Prior sensitivity | Optional | Side-by-side posterior densities under different priors (same data) | How sensitive are the conclusions to the prior assumptions? |
 
 #### Step 5a: Pipeline validation
 
@@ -253,32 +275,42 @@ The LLM produces the **predicted group means plot** (see standard plots). Bayesi
 - "There is a 94% probability that gratitude practice increases satisfaction ratings (median effect: 0.72 points, 89% CI [0.38, 1.09])."
 - "The probability that cultural background moderates the gratitude effect is 68%, with the moderation estimate centred near −0.25 (89% CI [−0.61, 0.14])."
 
-**Type S and Type M errors.** For each effect, students should also ask:
-- **Type S (sign):** What is the probability that the effect is in the *wrong direction*? If there is a 6% chance the effect is negative when the student predicted positive, that is a 6% Type S error rate.
-- **Type M (magnitude):** If the effect is real, how much could the estimate exaggerate it? The LLM can compute the ratio of the posterior median to the assumed true effect. A ratio of 2.0 means the estimate could be twice the true value.
+**Type S error (sign).** For each effect, students report the posterior probability that the effect is in the *wrong direction*. If there is a 6% chance the effect is negative when the student predicted positive, that is a 6% Type S error rate. This replaces "significant/not significant" with a question that matters: "Could I be wrong about the direction?"
 
-These replace "significant/not significant" with questions that matter: "Could I be wrong about the direction?" and "Could I be wrong about how big this is?" Students report both alongside the credible intervals.
+**Sanity check on magnitude.** Students compare the posterior median to the assumed true effect as a sanity check. Since the student built the effects in, the posterior should recover them approximately. A large discrepancy (e.g., posterior median of 1.5 when the assumed true effect was 0.8) signals a problem in the code, the model, or the priors — not a discovery. This is not a formal Type M analysis (which requires replication across many simulated datasets) but serves the same diagnostic purpose for this exercise.
 
 **Where the learning happens:** The first example statement suggests a fairly confident positive effect with low Type S risk. The second suggests genuine uncertainty — the credible interval includes zero, so the data are compatible with no moderation. What would it take to resolve that uncertainty? A larger sample? A different operationalisation of "cultural background"? That reasoning is the student's.
 
-**Sensitivity analysis.** The most interesting analytical move is changing a prior or an effect assumption and rerunning. The LLM produces the **sensitivity comparison plot** (see standard plots). What if a sceptical prior (centred on zero) is used for the main effect? Does the posterior still show a positive effect, or does it collapse? What if the cultural moderation were twice as large? The student specifies what to vary and why; the LLM reruns and produces comparison output. Interpreting why the posteriors did or did not change — and whether Type S and Type M errors shift — is where the learning happens.
+**Sensitivity analysis (optional but recommended).** There are two kinds, and they answer different questions:
+
+**Prior sensitivity (same data, different priors).** Hold the simulated data fixed. Change the priors. Refit. The LLM produces the **prior sensitivity plot** (see standard plots). What if a sceptical prior (centred on zero) is used for the main effect? Does the posterior still show a positive effect, or does it collapse? This directly teaches the lesson "priors matter, especially with small effects or wide posteriors." This is the more valuable sensitivity check for this exercise.
+
+**Effect-size exploration (different data, same priors).** Change the effect sizes in the simulation, regenerate the data, refit with the same priors. What if the gratitude effect were half as large? This is closer to a power analysis — it asks "would my analysis work under different ground truths?" It is useful but is a different exercise from prior sensitivity.
+
+Students who do sensitivity analysis should do prior sensitivity first. Effect-size exploration is a stretch goal. The student specifies what to vary and why; the LLM reruns and produces comparison output. Interpreting why the posteriors did or did not change is where the learning happens.
 
 ### Step 6: Report
 
 The report has sections that are primarily descriptive and sections that require judgment.
 
+The report is where the language-development mandate of the EAP program meets the research-methods exercise. The division of labour between LLM and student is not just about efficiency; it determines where academic English production happens.
+
 **LLM drafts, student evaluates and revises:**
 1. **Research question** (1–2 sentences) — formulated in Step 1; the LLM can polish wording.
-2. **Method** — describes decisions already made in Steps 2–4, plus the analysis pipeline validation (priors, prior predictive check, fake data recovery). The LLM drafts directly from the design specifications and code. The student checks accuracy and completeness. Should specify the LLM used, the random seed, and the number of participants.
-3. **Results** — the LLM produced the prior predictive plots, fake data recovery results, posterior summaries, credible intervals, posterior predictive checks, and visualisations in Step 5. The student organises them and describes the patterns. The LLM can draft descriptions of what the plots show; the student checks against the actual output.
+2. **Method** — describes decisions already made in Steps 2–4, plus the analysis pipeline validation. The LLM drafts directly from the design specifications and code. The student checks accuracy and completeness. Should specify the LLM used, the random seed, and the number of participants.
 
-**Student writes, LLM assists with language:**
-4. **Discussion** — What do the patterns suggest? What assumptions drive the result? What would change with real participants? This is interpretive work.
+**Student writes in academic prose (LLM assists with language, not reasoning):**
+3. **Results** — the student describes each plot and posterior summary in their own words. This is a language production task: describing what a posterior density shows, what a credible interval means, what the group-means plot reveals. The LLM can check grammar and suggest vocabulary, but the descriptions must be the student's. This is where CLO 4 (disciplinary terminology) and CLO 3 (summarise and synthesise) are directly assessed.
+4. **Discussion** — What do the patterns suggest? What assumptions drive the result? What would change with real participants? This is interpretive work in connected academic prose.
 5. **Limitations** — not optional; this is where the deepest thinking lives. At minimum:
    - The data reflects the effect model the student built, not human psychology. Different assumptions produce different patterns.
    - The priors influence the posteriors. Informative priors mean the results partly reflect prior beliefs, not just data. Vague priors are more data-driven but may be imprecise.
    - If the LLM helped set effect sizes or priors, those reflect its training data, which may encode stereotypes or inaccuracies.
    - The simulation cannot surprise the way real data can. It confirms or disconfirms the internal logic of the model, not a hypothesis about the world.
+
+**Language criteria.** Results, Discussion, and Limitations (sections 3–5) should be assessed for academic English as well as content. Suggested criteria: accurate use of disciplinary terminology (CLO 4), appropriate hedging and qualification, paraphrase accuracy when describing statistical output, register appropriate to an academic report. The weighting of language criteria within the 25% grade is for the instructor to determine, but it should be non-trivial — at least a third of the report grade — to ensure positive washback on language development.
+
+**Individual writing.** In a group project, Discussion and Limitations may be co-authored. However, the individual accountability mechanism (see Group Roles above) should include at least one component where each student writes independently in academic prose. The individual reflection is the natural candidate.
 
 ## Connection to course learning outcomes
 
@@ -286,8 +318,8 @@ The report has sections that are primarily descriptive and sections that require
 |---|---|
 | 1 (Theoretical frameworks) | Students operationalise a framework (PERMA, SDT, broaden-and-build, etc.) by specifying what to measure, what effects to model, and justifying effect sizes from the literature. |
 | 2 (Critical evaluation) | Prior predictive checks, fake data recovery checks, and posterior predictive checks teach model criticism. The pre-registration checkpoint teaches the distinction between planned and exploratory analysis. |
-| 3 (Academic texts) | The report requires citing course readings to justify the research question, the effect model, the priors, and the interpretation. |
-| 4 (Disciplinary terminology) | Design specifications, evaluation of generated items, effect-model justifications, and the report all require accurate use of terms (well-being, hedonic adaptation, self-efficacy, etc.). |
+| 3 (Academic texts) | The report requires citing course readings to justify the research question, the effect model, the priors, and the interpretation. Results, Discussion, and Limitations must be student-written academic prose. |
+| 4 (Disciplinary terminology) | Design specifications, item-review justifications, effect-model rationale, plot descriptions, and the report all require accurate use of terms (well-being, hedonic adaptation, self-efficacy, etc.). Language criteria in the rubric create direct washback. |
 | 5 (Academic discussion) | The 5-minute presentation uses a standardised Quarto Reveal.js template (`inquiry-presentation-template.qmd`) with designated slides for each report section. Plots are embedded from source code, so results cannot drift from the analysis. The student customises the content; the template provides the structure. |
 | 6 (Design and conduct inquiry) | The entire workflow. |
 | 7 (Well-being practices) | Students who study a well-being practice (gratitude, mindfulness, etc.) must understand it well enough to specify its expected effects and evaluate whether the simulation output is plausible. |
