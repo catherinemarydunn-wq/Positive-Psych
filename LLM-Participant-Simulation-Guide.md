@@ -21,6 +21,7 @@ A reference Python script (`simulate_wellbeing.py`) is included. If the LLM tool
 - Specifying what constructs to measure and evaluating whether generated survey items actually measure them
 - Specifying effect assumptions and justifying their direction and size from course readings
 - Specifying prior beliefs about effects, justifying the choice of informative vs. vague priors, and evaluating prior predictive output for plausibility
+- Validating an analysis pipeline using fake data and diagnosing recovery failures
 - Deciding what analytical questions to ask and interpreting posterior probabilities and credible intervals
 - Evaluating and revising LLM-generated output at every stage (profiles, items, code, analysis, prose)
 - Articulating the limitations of a data source honestly
@@ -183,8 +184,8 @@ The report has sections that are primarily descriptive and sections that require
 
 **LLM drafts, student evaluates and revises:**
 1. **Research question** (1–2 sentences) — formulated in Step 1; the LLM can polish wording.
-2. **Method** — describes decisions already made in Steps 2–4. The LLM drafts directly from the design specifications and code. The student checks accuracy and completeness. Should specify the LLM used, the random seed, and the number of participants.
-3. **Results** — the LLM produced the posterior summaries, credible intervals, predictive checks, and visualisations in Step 5. The student organises them and describes the patterns. The LLM can draft descriptions of what the plots show; the student checks against the actual output.
+2. **Method** — describes decisions already made in Steps 2–4, plus the analysis pipeline validation (priors, prior predictive check, fake data recovery). The LLM drafts directly from the design specifications and code. The student checks accuracy and completeness. Should specify the LLM used, the random seed, and the number of participants.
+3. **Results** — the LLM produced the prior predictive plots, fake data recovery results, posterior summaries, credible intervals, posterior predictive checks, and visualisations in Step 5. The student organises them and describes the patterns. The LLM can draft descriptions of what the plots show; the student checks against the actual output.
 
 **Student writes, LLM assists with language:**
 4. **Discussion** — What do the patterns suggest? What assumptions drive the result? What would change with real participants? This is interpretive work.
