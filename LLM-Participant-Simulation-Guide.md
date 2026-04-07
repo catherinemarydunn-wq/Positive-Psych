@@ -16,7 +16,6 @@ A reference Python script (`simulate_wellbeing.py`) is included. If the LLM tool
 
 ### Learning targets
 
-**Research reasoning:**
 - Translating a research question into measurable variables
 - Specifying a participant population: what characteristics matter, what their distributions should look like, and why
 - Specifying what constructs to measure and evaluating whether generated survey items actually measure them
@@ -26,13 +25,6 @@ A reference Python script (`simulate_wellbeing.py`) is included. If the LLM tool
 - Deciding what analytical questions to ask and interpreting posterior probabilities and credible intervals
 - Evaluating and revising LLM-generated output at every stage (profiles, items, code, analysis, prose)
 - Articulating the limitations of a data source honestly
-
-**Academic English production (CLOs 3, 4, 5):**
-- Writing design-choice rationale in connected academic prose (not bullet points)
-- Writing item-review justifications that articulate why a specific item is flawed, using disciplinary terminology
-- Writing the Discussion and Limitations sections of the report independently (LLM assists with language, but the reasoning and the prose are the student's)
-- Describing what plots show in accurate academic English, using disciplinary terms
-- Presenting and defending design decisions orally in the 5-minute presentation
 
 ## Group roles
 
@@ -293,24 +285,33 @@ Students who do sensitivity analysis should do prior sensitivity first. Effect-s
 
 The report has sections that are primarily descriptive and sections that require judgment.
 
-The report is where the language-development mandate of the EAP program meets the research-methods exercise. The division of labour between LLM and student is not just about efficiency; it determines where academic English production happens.
+The report has sections that are primarily descriptive and sections that require judgment.
 
 **LLM drafts, student evaluates and revises:**
 1. **Research question** (1–2 sentences) — formulated in Step 1; the LLM can polish wording.
 2. **Method** — describes decisions already made in Steps 2–4, plus the analysis pipeline validation. The LLM drafts directly from the design specifications and code. The student checks accuracy and completeness. Should specify the LLM used, the random seed, and the number of participants.
 
-**Student writes in academic prose (LLM assists with language, not reasoning):**
-3. **Results** — the student describes each plot and posterior summary in their own words. This is a language production task: describing what a posterior density shows, what a credible interval means, what the group-means plot reveals. The LLM can check grammar and suggest vocabulary, but the descriptions must be the student's. This is where CLO 4 (disciplinary terminology) and CLO 3 (summarise and synthesise) are directly assessed.
-4. **Discussion** — What do the patterns suggest? What assumptions drive the result? What would change with real participants? This is interpretive work in connected academic prose.
+**Student writes, LLM assists:**
+3. **Results** — describes each plot and posterior summary.
+4. **Discussion** — What do the patterns suggest? What assumptions drive the result? What would change with real participants?
 5. **Limitations** — not optional; this is where the deepest thinking lives. At minimum:
    - The data reflects the effect model the student built, not human psychology. Different assumptions produce different patterns.
    - The priors influence the posteriors. Informative priors mean the results partly reflect prior beliefs, not just data. Vague priors are more data-driven but may be imprecise.
    - If the LLM helped set effect sizes or priors, those reflect its training data, which may encode stereotypes or inaccuracies.
    - The simulation cannot surprise the way real data can. It confirms or disconfirms the internal logic of the model, not a hypothesis about the world.
 
-**Language criteria.** Results, Discussion, and Limitations (sections 3–5) should be assessed for academic English as well as content. Suggested criteria: accurate use of disciplinary terminology (CLO 4), appropriate hedging and qualification, paraphrase accuracy when describing statistical output, register appropriate to an academic report. The weighting of language criteria within the 25% grade is for the instructor to determine, but it should be non-trivial — at least a third of the report grade — to ensure positive washback on language development.
+## Language use in the workflow
 
-**Individual writing.** In a group project, Discussion and Limitations may be co-authored. However, the individual accountability mechanism (see Group Roles above) should include at least one component where each student writes independently in academic prose. The individual reflection is the natural candidate.
+The methodology creates communicative demand across all four skills. The table below maps where each skill naturally occurs and what artifact captures it. The instructor evaluates the language quality of these artifacts, not as a bolt-on criterion but because language is the medium through which the research reasoning is communicated.
+
+| Skill | Where it naturally occurs | Capturable artifact |
+|-------|--------------------------|---------------------|
+| Reading | Course literature for effect-size and prior justification; reading LLM-generated items and code summaries to evaluate them | Quality of justifications in the design spec and report |
+| Writing | Item-review judgments, design rationale, Results descriptions, Discussion, Limitations, individual reflection | The documents and report sections themselves |
+| Speaking | Group design discussions, negotiating design choices, presentation, Q&A defence | Presentation recording, oral defence responses |
+| Listening | Responding to group members' proposals, incorporating Q&A feedback | Quality of uptake in spoken responses and revised work |
+
+LLM use is natural for mechanical execution (generating profiles, writing code, drafting Method). LLM use is not natural for the communicative acts listed above — those require the student's own language because they involve judgment, evaluation, and argumentation specific to the project. The assessment evaluates language where language naturally happens, not where it has been artificially required.
 
 ## Connection to course learning outcomes
 
@@ -318,8 +319,8 @@ The report is where the language-development mandate of the EAP program meets th
 |---|---|
 | 1 (Theoretical frameworks) | Students operationalise a framework (PERMA, SDT, broaden-and-build, etc.) by specifying what to measure, what effects to model, and justifying effect sizes from the literature. |
 | 2 (Critical evaluation) | Prior predictive checks, fake data recovery checks, and posterior predictive checks teach model criticism. The pre-registration checkpoint teaches the distinction between planned and exploratory analysis. |
-| 3 (Academic texts) | The report requires citing course readings to justify the research question, the effect model, the priors, and the interpretation. Results, Discussion, and Limitations must be student-written academic prose. |
-| 4 (Disciplinary terminology) | Design specifications, item-review justifications, effect-model rationale, plot descriptions, and the report all require accurate use of terms (well-being, hedonic adaptation, self-efficacy, etc.). Language criteria in the rubric create direct washback. |
+| 3 (Academic texts) | Justifying effect sizes and priors requires reading and citing course literature. The report requires source-grounded argumentation. |
+| 4 (Disciplinary terminology) | Design specifications, item-review judgments, effect-model justifications, plot descriptions, and the report all require accurate use of terms (well-being, hedonic adaptation, self-efficacy, etc.). |
 | 5 (Academic discussion) | The 5-minute presentation uses a standardised Quarto Reveal.js template (`inquiry-presentation-template.qmd`) with designated slides for each report section. Plots are embedded from source code, so results cannot drift from the analysis. The student customises the content; the template provides the structure. |
 | 6 (Design and conduct inquiry) | The entire workflow. |
 | 7 (Well-being practices) | Students who study a well-being practice (gratitude, mindfulness, etc.) must understand it well enough to specify its expected effects and evaluate whether the simulation output is plausible. |
