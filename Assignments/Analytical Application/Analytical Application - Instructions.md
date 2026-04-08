@@ -32,7 +32,7 @@ You can choose **how you present your work**:
 - 6–8 slides *or* 1-page visual  
 - Include short written explanations (approx. 300–400 words total)  
 
-👉 All options must include:
+All options must include:
 - Clear explanation of a theory  
 - Application to a real situation  
 - 1–2 academic sources (APA)
@@ -123,13 +123,3 @@ To help you succeed, you can:
 - Use key terms like *flourishing, autonomy, resilience*  
 - Focus on **explaining why and how**, not just describing  
 - Keep your work clear and organized  
-
----
-
-## Why This Assignment Is Flexible (UDL)
-
-This assignment is designed to support different learners by:
-- Giving you **choice** in how you show your learning  
-- Providing **clear structure and examples**  
-- Offering **multiple ways to understand the content**  
-- Supporting both **language development and critical thinking**
