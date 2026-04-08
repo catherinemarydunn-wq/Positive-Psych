@@ -2,19 +2,6 @@
 
 ---
 
-## Notes on Revisions
-
-- Aligned all assessment weights across documents  
-- Filled in all missing word counts and presentation lengths  
-- Adjusted workload to be appropriate for CEFR B2 level  
-- Balanced weighting to better reflect language development (increased Discussion Portfolio to 20%)  
-- Integrated vocabulary expectations to support CLO 4  
-- Added interaction component to presentations to support CLO 5 (spoken discussion)  
-- Reduced cognitive overload by slightly lowering major project weight  
-- Ensured all rubrics match assessment descriptions exactly  
-
----
-
 ## Assessment Breakdown
 
 - **Analytical Application – 15%**  
