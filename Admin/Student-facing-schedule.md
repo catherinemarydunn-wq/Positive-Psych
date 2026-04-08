@@ -1,6 +1,6 @@
 # GPSE 100: Positive Psychology for Academic and Career Success  
 **Week-by-Week Schedule (Advancement Semester, B2)**  
-14 weeks, 2 classes per week  
+14 weeks, 3 hours per week 
 
 ---
 
