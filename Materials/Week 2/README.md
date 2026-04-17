@@ -26,10 +26,9 @@ By the end of this week, students should be able to:
 - **Hart (2021)**  
   *Positive Psychology: The Basics*  
   → Chapter 2 – Happiness  
-  👉 [Access Chapter 2](https://ebookcentral.proquest.com/lib/humber/reader.action?docID=6228914&ppg=35&c=RVBVQg)  
 
   → Chapter 3 – Wellbeing  
-  👉 [Access Chapter 3](https://ebookcentral.proquest.com/lib/humber/reader.action?docID=6228914&ppg=54&c=RVBVQg)
+  https://ebookcentral.proquest.com/lib/humber/reader.action?docID=6228914&ppg=1&c=UERG
 
 - [Understanding PERMA: A Multidimensional Model of Well-Being](./Understanding_PERMA.md)
 
