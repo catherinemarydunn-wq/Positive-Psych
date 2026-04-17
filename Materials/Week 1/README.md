@@ -11,19 +11,20 @@ This week introduces the field of positive psychology and explores the shift fro
 By the end of this week, students should be able to:
 
 - Define positive psychology  
-- Distinguish between happiness and flourishing  
-- Identify key goals of positive psychology  
-- Recognize potential critiques of the field  
+- Distinguish between traditional psychology and positive psychology  
+- Identify key goals of the field  
+- Recognize potential critiques of positive psychology  
 
 ---
 
 ## Readings
 
-### Core Reading
+### Core Concepts
 
-- **Positive Psychology the Basics**  
-  (PDF)  
-  → Focus on: introduction to positive psychology and the concept of flourishing  
+- **Hart (2021)**  
+  *Positive Psychology: The Basics*  
+  → Read: Chapter 1 – The Development of Positive Psychology  
+  👉 https://ebookcentral.proquest.com/lib/humber/reader.action?docID=6228914&ppg=17&c=RVBVQg
 
 ### Critical Perspective
 
@@ -33,9 +34,9 @@ By the end of this week, students should be able to:
 
 ## Note to Students
 
-The first reading introduces the main ideas of positive psychology. The second reading provides a critical perspective, encouraging you to think carefully about the strengths and limitations of the field.
+The first reading introduces the main ideas of positive psychology, including its history and purpose. The second reading provides a critical perspective, encouraging you to think carefully about both the strengths and limitations of the field.
 
-You are not expected to understand every word. Focus on the main ideas and be ready to discuss your reactions in class.
+You are not expected to understand every detail. Focus on the main ideas and be ready to discuss your reactions in class.
 
 ---
 
