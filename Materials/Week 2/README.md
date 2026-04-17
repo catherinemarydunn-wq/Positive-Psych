@@ -25,10 +25,11 @@ By the end of this week, students should be able to:
 
 - **Hart (2021)**  
   *Positive Psychology: The Basics*  
-  → Chapter 2 – Happiness  
+  → Read: Chapter 2 – Happiness  
+  → Read: Chapter 3 – Wellbeing  
+  👉 https://ebookcentral.proquest.com/lib/humber/reader.action?docID=6228914&c=UERG&ppg=211  
 
-  → Chapter 3 – Wellbeing  
-  https://ebookcentral.proquest.com/lib/humber/reader.action?docID=6228914&ppg=1&c=UERG
+  *(Use the table of contents or scroll to find Chapters 2 and 3.)*
 
 - [Understanding PERMA: A Multidimensional Model of Well-Being](./Understanding_PERMA.md)
 
@@ -46,7 +47,7 @@ By the end of this week, students should be able to:
 
 This week presents multiple perspectives on well-being. The textbook introduces key definitions of happiness and well-being. The PERMA model offers a structured framework. The cultural and Indigenous readings provide alternative perspectives that expand or challenge these ideas.
 
-As you read, think about how these perspectives are similar and different.
+When using the textbook link, you may need to scroll or use the table of contents to locate the correct chapters.
 
 ---
 
