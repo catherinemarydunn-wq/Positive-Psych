@@ -23,8 +23,10 @@ By the end of this week, students should be able to:
 
 - **Hart (2021)**  
   *Positive Psychology: The Basics*  
-  → Chapter 7 – Stress  
-  👉 [Access Chapter 7](https://ebookcentral.proquest.com/lib/humber/reader.action?docID=6228914&ppg=164&c=RVBVQg)
+  → Read: Chapter 7 – Stress  
+  👉 https://ebookcentral.proquest.com/lib/humber/reader.action?docID=6228914&c=UERG&ppg=211  
+
+  *(Use the table of contents or scroll to find Chapter 7.)*
 
 ### Applied Research
 
@@ -36,7 +38,7 @@ By the end of this week, students should be able to:
 
 This week connects stress and coping. The first reading explains how stress affects people and how it can be managed. The second reading introduces self-compassion as a research-based approach to responding to stress.
 
-As you read, think about how self-compassion might change the way people experience stress.
+When using the textbook link, you may need to scroll or use the table of contents to locate the correct chapter.
 
 ---
 
