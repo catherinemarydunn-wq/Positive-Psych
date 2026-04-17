@@ -2,9 +2,9 @@
 
 ## Overview
 
-This week explores different ways of understanding well-being. Students are introduced to the PERMA model, a widely used framework in positive psychology, and examine how cultural perspectives influence ideas about happiness and a good life.
+This week explores different ways of understanding well-being. Students are introduced to key concepts such as happiness and well-being, and examine how these ideas are defined in positive psychology.
 
-The week also includes Indigenous perspectives on well-being, emphasizing balance, relationships, and values.
+The week also introduces the PERMA model and considers how cultural and Indigenous perspectives expand or challenge common definitions of well-being.
 
 ---
 
@@ -12,16 +12,24 @@ The week also includes Indigenous perspectives on well-being, emphasizing balanc
 
 By the end of this week, students should be able to:
 
+- Define happiness and well-being  
 - Explain the PERMA model of well-being  
 - Compare different cultural perspectives on happiness  
 - Recognize that well-being is defined differently across contexts  
-- Reflect on their own understanding of well-being  
 
 ---
 
 ## Readings
 
 ### Core Concepts
+
+- **Hart (2021)**  
+  *Positive Psychology: The Basics*  
+  → Chapter 2 – Happiness  
+  👉 [Access Chapter 2](https://ebookcentral.proquest.com/lib/humber/reader.action?docID=6228914&ppg=35&c=RVBVQg)  
+
+  → Chapter 3 – Wellbeing  
+  👉 [Access Chapter 3](https://ebookcentral.proquest.com/lib/humber/reader.action?docID=6228914&ppg=54&c=RVBVQg)
 
 - [Understanding PERMA: A Multidimensional Model of Well-Being](./Understanding_PERMA.md)
 
@@ -37,7 +45,7 @@ By the end of this week, students should be able to:
 
 ## Note to Students
 
-This week presents different perspectives on well-being. The PERMA model offers a structured framework, while the second reading challenges the idea that happiness is the same across cultures. The Indigenous readings introduce a more holistic understanding of well-being based on balance, relationships, and values.
+This week presents multiple perspectives on well-being. The textbook introduces key definitions of happiness and well-being. The PERMA model offers a structured framework. The cultural and Indigenous readings provide alternative perspectives that expand or challenge these ideas.
 
 As you read, think about how these perspectives are similar and different.
 
