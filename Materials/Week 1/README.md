@@ -24,7 +24,7 @@ By the end of this week, students should be able to:
 - **Hart (2021)**  
   *Positive Psychology: The Basics*  
   → Read: Chapter 1 – The Development of Positive Psychology  
-  👉 https://ebookcentral.proquest.com/lib/humber/reader.action?docID=6228914&ppg=17&c=RVBVQg
+  👉 [https://ebookcentral.proquest.com/lib/humber/reader.action?docID=6228914&ppg=17&c=RVBVQg](https://ebookcentral.proquest.com/lib/humber/reader.action?docID=6228914&ppg=1&c=UERG)
 
 ### Critical Perspective
 
