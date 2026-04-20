@@ -7,204 +7,207 @@
 
 ## Week 1 – Introduction to Positive Psychology
 
-### In-Class Topics
-- Happiness vs. flourishing  
-- Overview of positive psychology  
-- Academic vocabulary  
+### In-Class Topics  
+Students are introduced to the field of positive psychology, including the distinction between happiness and flourishing. The week also establishes key academic vocabulary and expectations for the course.
 
-### Readings
-- **Hart (2021):** Introduces the origins of positive psychology and the shift from focusing on illness to flourishing  
-- **Held (2004):** Critiques positive psychology, highlighting potential oversimplifications and cultural bias  
+### Readings  
+- **Hart (2021), Chapter 1:** Introduction to positive psychology and its historical development  
+- **Held (2004):** A critical perspective on positive psychology, including cultural and conceptual limitations  
 
-### Assessment
+### Assessment  
 - Discussion Response #1 assigned  
 
 ---
 
-## Week 2 – PERMA & Cultural Perspectives
+## Week 2 – PERMA and Cultural Perspectives
 
-### Topics
-- PERMA model  
-- Cultural frameworks of well-being  
+### In-Class Topics  
+Students explore Seligman’s PERMA model of well-being alongside alternative cultural frameworks that emphasize balance, community, and relationality.
 
-### Readings
-- **PERMA excerpt:** Explains Seligman’s model of well-being (Positive Emotion, Engagement, Relationships, Meaning, Accomplishment)  
-- **Indigenous teachings:** Presents relational and holistic views of well-being rooted in community and balance  
-- **Joshanloo (2014):** Compares Western and non-Western ideas of happiness and invites critique of cultural generalizations  
+### Readings  
+- **Understanding PERMA: A Multidimensional Model of Well-Being (adapted)**  
+- **Indigenous teachings (Medicine Wheel and Seven Grandfather Teachings)**  
+- **Joshanloo (2014, adapted):** Cultural differences in conceptions of happiness  
 
-### Assessment
+### Assessment  
 - Discussion Response #1 due  
 
 ---
 
 ## Week 3 – Evaluating Research
 
-### Topics
-- Empirical research  
-- Correlation vs. causation  
-- Research checklist  
+### In-Class Topics  
+Students are introduced to empirical research, including how studies are designed and how to distinguish between correlation and causation.
 
-### Readings
-- **Simplified empirical article:** Introduces research design, variables, and how conclusions are drawn from data  
+### Readings  
+- **How to Read a Research Study (adapted guide)**  
+- **Simplified empirical article (adapted)**  
 
-### Assessment
+### Assessment  
 - Analytical Application assigned  
 
 ---
 
-## Week 4 – Positive Emotions & Gratitude
+## Week 4 – Positive Emotions and Gratitude
 
-### Topics
-- Broaden-and-build theory  
-- Gratitude practice  
+### In-Class Topics  
+Students examine the broaden-and-build theory and explore how positive emotions support learning and well-being. Gratitude is introduced as a specific intervention.
 
-### Readings
-- **Hart Chapter 4:** Explains how positive emotions expand thinking and support learning  
-- **Gratitude summary:** Reviews evidence showing how gratitude practices can improve well-being  
+### Readings  
+- **Hart (2021), Chapter 4:** Positive emotions and their effects  
+- **Understanding Gratitude and Well-Being (adapted)**  
 
-### Assessment
+### Assessment  
 - Work on Analytical Application  
 
 ---
 
-## Week 5 – Stress & Self-Compassion
+## Week 5 – Stress and Self-Compassion
 
-### Topics
-- Stress  
-- Resilience  
-- Self-compassion  
+### In-Class Topics  
+Students explore stress, coping, and resilience, with a focus on self-compassion as a psychological intervention.
 
-### Readings
-- **Hart stress excerpt:** Defines stress and coping strategies in academic contexts  
-- **Neff & Germer (2013):** Examines self-compassion as an intervention and its psychological benefits  
+### Readings  
+- **Hart (2021), stress section**  
+- **Neff & Germer (2013, adapted):** Self-compassion intervention study  
 
-### Assessment
+### Assessment  
 - Analytical Application due  
 - Research Critique assigned  
 
 ---
 
-## Week 6 – Strengths & Grit
+## Week 6 – Strengths and Grit
 
-### Topics
-- Character strengths  
-- Critique of grit  
+### In-Class Topics  
+Students are introduced to character strengths and examine the concept of grit, including its strengths and limitations.
 
-### Readings
-- **Hart strengths excerpt:** Introduces VIA character strengths and their role in well-being  
-- **Grit critique:** Questions the overemphasis on perseverance and highlights structural factors  
+### Readings  
+- **Hart (2021), Character Strengths chapter**  
+- **Grit, Success, and Its Limits (adapted)**  
 
-### Assessment
+### Assessment  
 - Work on Research Critique  
 
 ---
 
 ## Week 7 – Self-Determination Theory
 
-### Topics
-- Autonomy  
-- Competence  
-- Relatedness  
+### In-Class Topics  
+Students explore motivation through Self-Determination Theory, focusing on autonomy, competence, and relatedness.
 
-### Readings
-- **SDT overview:** Explains basic psychological needs and motivation  
-- **Cultural critique note:** Questions whether these needs apply equally across cultures  
+### Readings  
+- **Motivation and Well-Being: Self-Determination Theory (adapted)**  
 
-### Assessment
+### Assessment  
 - Discussion Response #2 due  
 
 ---
 
-## Week 8 – Reading Week
+## 🔹 Reading Week (No Class)
 
-### Topics
-- No class  
-
-### Assessment
-- Catch-up and project work  
+Students are encouraged to catch up on readings and assignments.
 
 ---
 
-## Week 9 – Goals & Flow
+## Week 8 – Goals and Flow
 
-### Topics
-- Goal setting  
-- Flow  
-- Self-regulation  
+### In-Class Topics  
+Students examine goal setting, self-regulation, and the concept of flow as a state of optimal engagement.
 
-### Readings
-- **Hart excerpts:** Explains how flow and structured goal-setting improve performance and engagement  
+### Readings  
+- **Hart (2021), Flow chapter**  
+- **Goal Setting, Motivation, and Flow (adapted)**  
 
-### Assessment
-- Inquiry proposal checkpoint  
+### Assessment  
+- Inquiry Project proposal checkpoint  
 - Groups formed  
 
 ---
 
-## Week 10 – Methods & AI
+## Week 9 – Methods, Simulation, and AI
 
-### Topics
-- Survey design  
-- Ethics  
-- AI use  
+### In-Class Topics  
+Students are introduced to research design, simulation-based inquiry, and responsible AI use in academic work.
 
-### Readings
-- **Methods guide:** Introduces basic research design and descriptive statistics  
-- **AI module:** Covers ethical and responsible use of AI tools in academic work  
+### Readings  
+- **Designing a Simple Research Study (adapted guide)**  
+- **Understanding Simulation and Models in Research (adapted guide)**  
+- **Using AI in Academic Work: Guidelines and Responsibilities (adapted guide)**  
 
-### Assessment
+### Assessment  
 - Discussion Response #3 assigned  
+- Begin Inquiry Project  
 
 ---
 
-## Week 11 – Inquiry Workshop
+## Week 10 – Inquiry Workshop: Interpreting Results and Preparing Presentations
 
-### Topics
-- Data analysis  
-- Drafting  
+### In-Class Topics  
+Students analyze their results, identify key patterns, and begin preparing their presentations.
 
-### Assessment
-- Work on inquiry project  
+### Readings  
+- **Interpreting Results in Research (adapted guide)**  
+- **What Makes a Good Academic Presentation (adapted guide)**  
 
----
-
-## Week 12 – Inquiry Presentations
-
-### Topics
-- Presentations  
-
-### Readings
-- **Intervention effectiveness summary:** Reviews general findings on what types of interventions tend to work  
-
-### Assessment
-- Inquiry report + presentation due  
+### Assessment  
+- Work on Inquiry Project  
+- Begin preparing Inquiry Presentation  
 
 ---
 
-## Week 13 – Designing Interventions
+## Week 11 – Inquiry Presentations
 
-### Topics
-- Intervention design  
-- Critical perspectives  
+### In-Class Topics  
+Students present their inquiry projects, focusing on clear communication and thoughtful interpretation.
 
-### Readings
-- **Hart interventions excerpt:** Explains how to design and evaluate positive psychology interventions  
+### Readings  
+- No new readings  
 
-### Assessment
+### Assessment  
+- Inquiry Presentation  
+- Inquiry Report due  
+
+---
+
+## Week 12 – Designing Interventions
+
+### In-Class Topics  
+Students explore positive psychology interventions and consider how course concepts can be applied in real-world contexts.
+
+### Readings  
+- **Hart (2021), Interventions chapter**  
+
+### Assessment  
 - Discussion Response #3 due  
 - Discussion Response #4 assigned  
 
 ---
 
-## Week 14 – Final Presentations
+## Week 13 – Intervention Project Workshop
 
-### Topics
-- Final presentations  
-- Course synthesis  
+### In-Class Topics  
+Students develop and refine their intervention projects with guided support.
 
-### Assessment
-- Intervention project due  
-- Discussion Response #4 due  
+### Readings  
+- No new readings  
+
+### Assessment  
+- Work on Intervention Project  
+
+---
+
+## Week 14 – Intervention Presentations and Course Reflection
+
+### In-Class Topics  
+Students present their intervention projects and reflect on their learning across the course.
+
+### Readings  
+- No new readings  
+
+### Assessment  
+- Intervention Project due  
+- Intervention Presentation  
 
 ---
 
@@ -216,4 +219,4 @@ Held, B. S. (2004). The negative side of positive psychology. *Journal of Humani
 
 Joshanloo, M. (2014). Eastern conceptualizations of happiness: Fundamental differences with Western views. *Journal of Happiness Studies, 15*(2), 475–493.  
 
-Neff, K. D., & Germer, C. K. (2013). A pilot study and randomized controlled trial of the mindful self-compassion program. *Journal of Clinical Psychology, 69*(1), 28–44.
+Neff, K. D., & Germer, C. K. (2013). A pilot study and randomized controlled trial of the mindful self-compassion program. *Journal of Clinical Psychology, 69*(1), 28–44.  
