@@ -29,7 +29,6 @@ By the end of this week, students should be able to:
   → Read: Chapter 6 
   👉 https://ebookcentral.proquest.com/lib/humber/reader.action?docID=6228914&c=UERG&ppg=211  
 
-  *(Use the table of contents or search “Flow” to find the chapter.)*
 
 - [Goal Setting, Motivation, and Flow](./Goal_Setting_and_Flow.md)
 
