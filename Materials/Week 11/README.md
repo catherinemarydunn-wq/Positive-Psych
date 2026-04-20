@@ -23,7 +23,8 @@ By the end of this week, students should be able to:
 
 ### Optional Support
 
-- [Interpreting Results in Research](./Interpreting_Results.md)
+- [Interpreting Results in Research](./Interpreting_Results.md)  
+- [What Makes a Good Academic Presentation](./Academic_Presentation_Guide.md)
 
 ---
 
