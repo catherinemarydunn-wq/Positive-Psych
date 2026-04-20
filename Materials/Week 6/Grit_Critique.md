@@ -1,5 +1,5 @@
 # Grit, Success, and Its Limits  
-*(Adapted from Duckworth and subsequent critiques)*
+*(Adapted from Duckworth et al., 2007; Credé et al., 2017; Kohn, 2014)*
 
 ---
 
@@ -25,7 +25,7 @@ Angela Duckworth, one of the main researchers on grit, defines it as a combinati
 - **perseverance** (continuing effort despite difficulty)  
 - **passion** (long-term commitment to goals)  
 
-According to this view, individuals who show high levels of grit are more likely to succeed in areas such as school, work, and personal development.
+According to this view, individuals who show high levels of grit are more likely to succeed in areas such as school, work, and personal development (Duckworth et al., 2007).
 
 ---
 
@@ -37,7 +37,7 @@ Research on grit suggests that it is related to positive outcomes. For example, 
 - achieve long-term goals  
 - persist after failure  
 
-Some studies have found that grit predicts success even more strongly than intelligence or talent. Because of this, grit has been promoted as an important quality that can be developed through effort and practice.
+Some studies have found that grit predicts success even more strongly than intelligence or talent (Duckworth et al., 2007). Because of this, grit has been promoted as an important quality that can be developed through effort and practice.
 
 This idea is appealing because it suggests that success is within everyone’s control.
 
@@ -58,7 +58,7 @@ However, this view may ignore important external factors, including:
 - social support  
 - systemic inequality  
 
-These factors can strongly influence a person’s opportunities and outcomes.
+These factors can strongly influence a person’s opportunities and outcomes (Kohn, 2014).
 
 ---
 
@@ -66,7 +66,7 @@ These factors can strongly influence a person’s opportunities and outcomes.
 
 Critics argue that promoting grit can unintentionally place responsibility on individuals for situations that are not fully under their control.
 
-For example, students from disadvantaged backgrounds may face barriers that cannot be overcome through effort alone. In these cases, focusing only on grit may overlook the need for broader social change.
+For example, students from disadvantaged backgrounds may face barriers that cannot be overcome through effort alone. In these cases, focusing only on grit may overlook the need for broader social change (Kohn, 2014).
 
 ---
 
@@ -86,11 +86,7 @@ If individuals are told to “never give up,” they may ignore signs of stress,
 
 ### Overlap with Other Concepts
 
-Some researchers have also questioned whether grit is truly a new concept. They argue that grit is similar to existing ideas such as:
-
-- conscientiousness (a personality trait)  
-- self-control  
-- motivation  
+Some researchers have also questioned whether grit is truly a new concept. A large meta-analysis found that grit overlaps strongly with existing traits such as conscientiousness and may not add much new information (Credé et al., 2017).
 
 This raises questions about whether grit provides unique insight into success.
 
@@ -113,3 +109,13 @@ Rather than viewing grit as the only path to success, it is more helpful to see 
 Grit highlights the importance of effort and persistence, but it does not fully explain success. Social, cultural, and economic factors also play a significant role.
 
 A more complete understanding of success considers both individual qualities and the broader context in which people live and work.
+
+---
+
+## References
+
+Credé, M., Tynan, M. C., & Harms, P. D. (2017). Much ado about grit: A meta-analytic synthesis of the grit literature. *Journal of Personality and Social Psychology, 113*(3), 492–511. https://doi.org/10.1037/pspp0000102  
+
+Duckworth, A. L., Peterson, C., Matthews, M. D., & Kelly, D. R. (2007). Grit: Perseverance and passion for long-term goals. *Journal of Personality and Social Psychology, 92*(6), 1087–1101. https://doi.org/10.1037/0022-3514.92.6.1087  
+
+Kohn, A. (2014). The downside of “grit”: What really happens when kids are pushed to be more persistent? *The Washington Post*. 
