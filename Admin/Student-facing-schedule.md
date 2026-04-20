@@ -1,8 +1,6 @@
 # GPSE 100: Positive Psychology for Academic and Career Success  
 **Week-by-Week Schedule (Advancement Semester, B2)**  
-14 weeks, 3 hours per week 
-
----
+14 weeks, 3 hours per week  
 
 This schedule shows:
 - What we are learning each week  
@@ -13,257 +11,278 @@ This schedule shows:
 
 ## Week 1: Introduction to Positive Psychology
 
-**Topics**
+### Topics
 - Happiness vs. flourishing  
 - Overview of positive psychology  
 - Academic vocabulary  
 
-**Readings**
+### Readings
 - Hart (2021) – Introduction  
 - Held (2004) – Critique of positive psychology  
 
-**What’s due**
+### What’s Due
 - Nothing  
 
-**What’s assigned**
+### What’s Assigned
 - Discussion Response #1  
 
 ---
 
 ## Week 2: PERMA & Cultural Perspectives
 
-**Topics**
+### Topics
 - PERMA model  
 - Cultural frameworks of well-being  
 
-**Readings**
-- PERMA excerpt  
-- Indigenous teachings  
-- Joshanloo (2014)  
+### Readings
+- Understanding PERMA (adapted)  
+- Indigenous teachings (Medicine Wheel, Seven Grandfather Teachings)  
+- Joshanloo (2014, adapted)  
 
-**What’s due**
+### What’s Due
 - Discussion Response #1  
 
-**What’s assigned**
+### What’s Assigned
 - Continue Discussion Response #1 (if needed)  
 
 ---
 
 ## Week 3: Evaluating Research
 
-**Topics**
+### Topics
 - Empirical research  
 - Correlation vs. causation  
-- Research checklist  
+- How to read a study  
 
-**Readings**
+### Readings
+- How to Read a Research Study (guide)  
 - Simplified empirical article  
 
-**What’s due**
+### What’s Due
 - Nothing  
 
-**What’s assigned**
+### What’s Assigned
 - Analytical Application (15%)  
 
 ---
 
 ## Week 4: Positive Emotions & Gratitude
 
-**Topics**
+### Topics
 - Broaden-and-build theory  
 - Gratitude practice  
 
-**Readings**
+### Readings
 - Hart Chapter 4  
-- Gratitude summary  
+- Understanding Gratitude and Well-Being (adapted)  
 
-**What’s due**
+### What’s Due
 - Nothing  
 
-**What’s assigned**
+### What’s Assigned
 - Continue Analytical Application  
 
 ---
 
 ## Week 5: Stress & Self-Compassion
 
-**Topics**
-- Stress  
+### Topics
+- Stress and coping  
 - Resilience  
 - Self-compassion  
 
-**Readings**
-- Hart (stress excerpt)  
-- Neff & Germer (2013)  
+### Readings
+- Hart (stress section)  
+- Neff & Germer (2013, adapted)  
 
-**What’s due**
+### What’s Due
 - Analytical Application (15%)  
 
-**What’s assigned**
+### What’s Assigned
 - Research Critique (15%)  
 
 ---
 
 ## Week 6: Strengths & Grit
 
-**Topics**
+### Topics
 - Character strengths  
 - Critique of grit  
 
-**Readings**
-- Hart (strengths excerpt)  
-- Grit critique  
+### Readings
+- Hart (character strengths)  
+- Grit, Success, and Its Limits (adapted)  
 
-**What’s due**
+### What’s Due
 - Nothing  
 
-**What’s assigned**
+### What’s Assigned
 - Continue Research Critique  
 
 ---
 
 ## Week 7: Self-Determination Theory
 
-**Topics**
+### Topics
 - Autonomy  
 - Competence  
 - Relatedness  
+- Motivation  
 
-**Readings**
-- SDT overview  
-- Cultural critique note  
+### Readings
+- Motivation and Well-Being: Self-Determination Theory (adapted)  
 
-**What’s due**
+### What’s Due
 - Research Critique (15%)  
 
-**What’s assigned**
+### What’s Assigned
 - Discussion Response #2  
 
 ---
 
-## Week 8: Reading Week
+## 🔹 Reading Week
 
-**Topics**
+### Topics
 - No class  
 
-**What’s due**
+### What’s Due
 - Nothing  
 
-**What’s assigned**
+### What’s Assigned
 - Catch up on work  
 
 ---
 
-## Week 9: Goals & Flow
+## Week 8: Goals & Flow
 
-**Topics**
+### Topics
 - Goal setting  
 - Flow  
 - Self-regulation  
 
-**Readings**
-- Hart (goal-setting and flow excerpts)  
+### Readings
+- Hart (flow chapter)  
+- Goal Setting, Motivation, and Flow (adapted)  
 
-**What’s due**
+### What’s Due
 - Discussion Response #2  
 
-**What’s assigned**
-- Inquiry Project (group project begins)  
+### What’s Assigned
+- Inquiry Project begins (group project)  
 - Proposal checkpoint  
+- Groups formed  
 
 ---
 
-## Week 10: Methods & AI
+## Week 9: Methods, Simulation & AI
 
-**Topics**
-- Survey design  
-- Ethics  
-- AI use  
+### Topics
+- Research design  
+- Simulation  
+- AI use and academic integrity  
 
-**Readings**
-- Methods guide  
-- AI module  
+### Readings
+- Designing a Simple Research Study (guide)  
+- Understanding Simulation and Models (guide)  
+- Using AI in Academic Work (guide)  
 
-**What’s due**
+### What’s Due
 - Inquiry proposal checkpoint  
 
-**What’s assigned**
+### What’s Assigned
 - Discussion Response #3  
-
----
-
-## Week 11: Inquiry Workshop
-
-**Topics**
-- Data analysis  
-- Drafting  
-
-**What’s due**
-- Nothing  
-
-**What’s assigned**
 - Continue Inquiry Project  
 
 ---
 
-## Week 12: Inquiry Presentations
+## Week 10: Inquiry Workshop (Results & Presentations)
 
-**Topics**
+### Topics
+- Interpreting results  
+- Explaining findings  
+- Preparing presentations  
+
+### Readings
+- Interpreting Results in Research (guide)  
+- What Makes a Good Academic Presentation (guide)  
+
+### What’s Due
+- Nothing  
+
+### What’s Assigned
+- Continue Inquiry Project  
+- Prepare Inquiry Presentation  
+
+---
+
+## Week 11: Inquiry Presentations
+
+### Topics
 - Presentations  
 
-**Readings**
-- Intervention effectiveness summary  
+### What’s Due
+- Inquiry Project (Report + Presentation)  
 
-**What’s due**
-- Inquiry Report + Presentation  
-
-**What’s assigned**
+### What’s Assigned
 - Intervention Project (25%)  
 
 ---
 
-## Week 13: Designing Interventions
+## Week 12: Designing Interventions
 
-**Topics**
+### Topics
 - Intervention design  
-- Critical perspectives  
+- What works (and what doesn’t)  
 
-**Readings**
-- Hart (interventions excerpt)  
+### Readings
+- Hart (interventions chapter)  
 
-**What’s due**
+### What’s Due
 - Discussion Response #3  
 
-**What’s assigned**
+### What’s Assigned
 - Discussion Response #4  
+- Continue Intervention Project  
+
+---
+
+## Week 13: Intervention Project Workshop
+
+### Topics
+- Developing and refining interventions  
+
+### What’s Due
+- Nothing  
+
+### What’s Assigned
 - Continue Intervention Project  
 
 ---
 
 ## Week 14: Final Presentations & Course Wrap-Up
 
-**Topics**
-- Final presentations  
-- Course synthesis  
+### Topics
+- Intervention presentations  
+- Course reflection  
 
-**What’s due**
+### What’s Due
 - Intervention Project (Report + Presentation)  
 - Discussion Response #4  
 
-**What’s assigned**
+### What’s Assigned
 - Nothing  
 
 ---
 
 # Assessment Summary
 
-| Assessment | Weight | When |
-|----------|--------|------|
+| Assessment | Weight | Due |
+|----------|--------|-----|
 | Analytical Application | 15% | Week 5 |
 | Research Critique | 15% | Week 7 |
-| Inquiry Project | 25% | Week 12 |
+| Inquiry Project | 25% | Week 11 |
 | Intervention Project | 25% | Week 14 |
-| Discussion Responses (4 total) | 20% | Weeks 2, 7, 9, 14 |
+| Discussion Responses (4) | 20% | Weeks 2, 7, 8, 14 |
 | **Total** | **100%** | |
 
 ---
@@ -273,5 +292,5 @@ This schedule shows:
 - Stay up to date with weekly readings  
 - Use course vocabulary in your work  
 - Ask questions early  
-- Connect ideas to your real academic and career goals  
-- Focus on application, not just memorization  
+- Connect ideas to your academic and career goals  
+- Focus on applying ideas, not just memorizing them  
