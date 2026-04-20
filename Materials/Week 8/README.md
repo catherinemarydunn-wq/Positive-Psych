@@ -26,7 +26,7 @@ By the end of this week, students should be able to:
 
 - **Hart (2021)**  
   *Positive Psychology: The Basics*  
-  → Read: Chapter 6 – Flow and optimal experience  
+  → Read: Chapter 6 
   👉 https://ebookcentral.proquest.com/lib/humber/reader.action?docID=6228914&c=UERG&ppg=211  
 
   *(Use the table of contents or search “Flow” to find the chapter.)*
