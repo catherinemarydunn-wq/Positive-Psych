@@ -1,4 +1,4 @@
-# Week 10 – Interpreting Results and Preparing Presentations
+# Week 10 – Inquiry Workshop
 
 ## Overview
 
