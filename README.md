@@ -61,4 +61,4 @@ Each week includes:
 ## Contact
 
 For questions about this course, please contact:
-[Your Name]
+catherine.dunn@humber.ca
