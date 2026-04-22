@@ -36,14 +36,14 @@ This schedule shows:
 
 ### Readings
 - Understanding PERMA (adapted)  
-- Indigenous teachings (Medicine Wheel, Seven Grandfather Teachings)  
+- Indigenous teachings  
 - Joshanloo (2014, adapted)  
 
 ### What’s Due
 - Discussion Response #1  
 
 ### What’s Assigned
-- Continue Discussion Response #1 (if needed)  
+- —  
 
 ---
 
@@ -52,10 +52,9 @@ This schedule shows:
 ### Topics
 - Empirical research  
 - Correlation vs. causation  
-- How to read a study  
 
 ### Readings
-- How to Read a Research Study (guide)  
+- Research guide  
 - Simplified empirical article  
 
 ### What’s Due
@@ -74,7 +73,7 @@ This schedule shows:
 
 ### Readings
 - Hart Chapter 4  
-- Understanding Gratitude and Well-Being (adapted)  
+- Gratitude guide  
 
 ### What’s Due
 - Nothing  
@@ -88,12 +87,11 @@ This schedule shows:
 
 ### Topics
 - Stress and coping  
-- Resilience  
 - Self-compassion  
 
 ### Readings
 - Hart (stress section)  
-- Neff & Germer (2013, adapted)  
+- Neff & Germer (2013)  
 
 ### What’s Due
 - Analytical Application (15%)  
@@ -110,8 +108,8 @@ This schedule shows:
 - Critique of grit  
 
 ### Readings
-- Hart (character strengths)  
-- Grit, Success, and Its Limits (adapted)  
+- Strengths excerpt  
+- Grit critique  
 
 ### What’s Due
 - Nothing  
@@ -124,31 +122,22 @@ This schedule shows:
 ## Week 7: Self-Determination Theory
 
 ### Topics
-- Autonomy  
-- Competence  
-- Relatedness  
-- Motivation  
+- Motivation (autonomy, competence, relatedness)  
 
 ### Readings
-- Motivation and Well-Being: Self-Determination Theory (adapted)  
+- SDT overview  
 
 ### What’s Due
 - Research Critique (15%)  
+- Discussion Response #2  
 
 ### What’s Assigned
-- Discussion Response #2  
+- —  
 
 ---
 
 ## 🔹 Reading Week
 
-### Topics
-- No class  
-
-### What’s Due
-- Nothing  
-
-### What’s Assigned
 - Catch up on work  
 
 ---
@@ -161,14 +150,14 @@ This schedule shows:
 - Self-regulation  
 
 ### Readings
-- Hart (flow chapter)  
-- Goal Setting, Motivation, and Flow (adapted)  
+- Flow chapter  
+- Goal-setting guide  
 
 ### What’s Due
-- Discussion Response #2  
+- Nothing  
 
 ### What’s Assigned
-- Inquiry Project begins (group project)  
+- Inquiry Project begins  
 - Proposal checkpoint  
 - Groups formed  
 
@@ -179,12 +168,12 @@ This schedule shows:
 ### Topics
 - Research design  
 - Simulation  
-- AI use and academic integrity  
+- AI use  
 
 ### Readings
-- Designing a Simple Research Study (guide)  
-- Understanding Simulation and Models (guide)  
-- Using AI in Academic Work (guide)  
+- Methods guide  
+- Simulation guide  
+- AI guidelines  
 
 ### What’s Due
 - Inquiry proposal checkpoint  
@@ -195,23 +184,21 @@ This schedule shows:
 
 ---
 
-## Week 10: Inquiry Workshop (Results & Presentations)
+## Week 10: Inquiry Workshop
 
 ### Topics
 - Interpreting results  
-- Explaining findings  
 - Preparing presentations  
 
 ### Readings
-- Interpreting Results in Research (guide)  
-- What Makes a Good Academic Presentation (guide)  
+- Results guide  
+- Presentation guide  
 
 ### What’s Due
-- Nothing  
+- Discussion Response #3  
 
 ### What’s Assigned
 - Continue Inquiry Project  
-- Prepare Inquiry Presentation  
 
 ---
 
@@ -232,13 +219,12 @@ This schedule shows:
 
 ### Topics
 - Intervention design  
-- What works (and what doesn’t)  
 
 ### Readings
-- Hart (interventions chapter)  
+- Interventions chapter  
 
 ### What’s Due
-- Discussion Response #3  
+- Nothing  
 
 ### What’s Assigned
 - Discussion Response #4  
@@ -246,13 +232,13 @@ This schedule shows:
 
 ---
 
-## Week 13: Intervention Project Workshop
+## Week 13: Intervention Workshop
 
 ### Topics
-- Developing and refining interventions  
+- Refining interventions  
 
 ### What’s Due
-- Nothing  
+- Discussion Response #4  
 
 ### What’s Assigned
 - Continue Intervention Project  
@@ -267,10 +253,9 @@ This schedule shows:
 
 ### What’s Due
 - Intervention Project (Report + Presentation)  
-- Discussion Response #4  
 
 ### What’s Assigned
-- Nothing  
+- —  
 
 ---
 
@@ -282,15 +267,15 @@ This schedule shows:
 | Research Critique | 15% | Week 7 |
 | Inquiry Project | 25% | Week 11 |
 | Intervention Project | 25% | Week 14 |
-| Discussion Responses (4) | 20% | Weeks 2, 7, 8, 14 |
+| Discussion Responses (4) | 20% | Weeks 2, 7, 10, 13 |
 | **Total** | **100%** | |
 
 ---
 
 # How to Succeed in This Course
 
-- Stay up to date with weekly readings  
-- Use course vocabulary in your work  
+- Stay up to date with readings  
+- Use course vocabulary  
 - Ask questions early  
-- Connect ideas to your academic and career goals  
-- Focus on applying ideas, not just memorizing them  
+- Connect ideas to real life  
+- Focus on applying ideas—not memorizing  
