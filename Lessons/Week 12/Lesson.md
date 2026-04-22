@@ -185,7 +185,6 @@ Prompt:
 
 # 🧠 Homework / Follow-Up
 
-- **Discussion Response #3 due**
 - **Discussion Response #4 assigned**
 - Begin planning Intervention Project  
 
