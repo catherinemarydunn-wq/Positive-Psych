@@ -17,7 +17,7 @@ This schedule shows:
 - Academic vocabulary  
 
 ### Readings
-- Hart (2021) – Introduction  
+- Hart
 - Held (2004) – Critique of positive psychology  
 
 ### What’s Due
