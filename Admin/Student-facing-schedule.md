@@ -17,7 +17,10 @@ This schedule shows:
 - Academic vocabulary  
 
 ### Readings
-- Hart
+- Hart (2021)
+Positive Psychology: The Basics
+→ Read: Chapter 1
+👉 https://ebookcentral.proquest.com/lib/humber/reader.action?docID=6228914&c=UERG&ppg=211
 - Held (2004) – Critique of positive psychology  
 
 ### What’s Due
